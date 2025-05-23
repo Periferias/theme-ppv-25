@@ -5,10 +5,17 @@ namespace PeriferiaViva25;
 use MapasCulturais\App;
 
 class Theme extends \MapasCulturais\Themes\BaseV2\Theme {
+
+    static function getThemeFolder()
+    {
+        return __DIR__;
+    }
+
     function _init()
     {
         parent::_init();
-        $this->bodyClasses[] = 'maranhao-theme';
+
+        $app = App::i();
 
     }
 }
