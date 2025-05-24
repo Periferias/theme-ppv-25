@@ -18,7 +18,7 @@ $primary-500: #044cb8;
 $secondary-500: darken(#044cb8, 20%);
 
 // Entities colors
-$opportunities-500: #019C45;
+$opportunities-500: #ff0000;
 $events-500: #77c14e;
 $spaces-500: darken(#77c14e, 15%);
 $agents-500: #77c14e;
@@ -38,7 +38,7 @@ $home-feature: #77c14e;
 $home-register: #044cb8;
 
 // // Neutral colors
-// $low-500: #1E1E1E;
+$low-500: #2177F4;
 // $high-500: #FFFFFF;
 
 // // FONTS
@@ -70,5 +70,13 @@ $home-register: #044cb8;
   display: none;
 }
 .topo-togov-wrapper {
+  display: none;
+}
+
+/** 
+Ocultando o ID e se a oportunidade esta aberta, na página de Oportunidades
+*/
+
+.user-slot {
   display: none;
 }
