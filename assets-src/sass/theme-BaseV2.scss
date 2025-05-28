@@ -80,3 +80,9 @@ Ocultando o ID e se a oportunidade esta aberta, na página de Oportunidades
 .user-slot {
   display: none;
 }
+/** 
+Ocultando o ID e tipo, na página de Oportunidades
+*/
+.metadata > dl {
+  display: none !important;
+}
