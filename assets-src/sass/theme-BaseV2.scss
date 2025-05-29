@@ -80,6 +80,15 @@ Ocultando o ID e se a oportunidade esta aberta, na página de Oportunidades
 .user-slot {
   display: none;
 }
+
+/** 
+Ocultando os ícones de compartilhar da tela da oportunidade
+*/
+
+.mc-share-links {
+  display: none;
+}
+
 /** 
 Ocultando o ID e tipo, na página de Oportunidades
 */
