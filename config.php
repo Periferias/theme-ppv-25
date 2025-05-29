@@ -10,4 +10,10 @@ return [
     */
     'logo.image' => './img/logo-site.png',
     'logo.hideLabel' => env('LOGO_HIDELABEL', true),
+
+    /* 
+    Define o nome do asset da imagem do background e banner no header da home - Substituirá o background padrão
+    ex: `img/meu-home-header-background.jpg` (pasta assets/img/meu-home-header-background.jpg do tema)
+    */
+    'homeHeader.background' => './img/home-header/home-header2.jpg',
 ];
