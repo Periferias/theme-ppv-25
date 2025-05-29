@@ -92,6 +92,15 @@ Ocultando os ícones de compartilhar da tela da oportunidade
 /** 
 Ocultando o ID e tipo, na página de Oportunidades
 */
+
 .metadata > dl {
   display: none !important;
+}
+
+/** 
+Ocultando o título Publicado por na tela da oportunidade
+*/
+
+.entity-owner {
+  display: none;
 }
