@@ -114,6 +114,14 @@ Ocultando os botões de Denúncia e Contato
 }
 
 /** 
+Ocultando a parte de selos na tela da oportunidade
+*/
+
+.entity-seals {
+  display: none;
+}
+
+/** 
 Ocultando termos dos cards de Oportunidades
 */
 
