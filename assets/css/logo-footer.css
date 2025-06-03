@@ -1,0 +1,17 @@
+.logo-footer {
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 15px 0;
+    gap: 16px;
+}
+
+.logo-footer img {
+    height: 80px;
+    padding: 5px;
+}
+
+.main-footer {
+    padding: 1.5rem 1.5rem;
+}
