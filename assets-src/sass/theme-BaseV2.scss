@@ -297,4 +297,8 @@ Melhorando a exibição da imagem em destaque da home
   display: none;
 }
 
-
+.panel-nav__right h3,
+.panel-nav__right > ul, 
+.panel-nav__right .panel-nav__line {
+  display: none;
+}
