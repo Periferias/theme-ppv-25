@@ -75,7 +75,7 @@ $low-500: #00318C;
   display: none;
 }
 
-/** 
+/**
 Ocultando o ID e se a oportunidade esta aberta, na página de Oportunidades
 */
 
@@ -83,7 +83,7 @@ Ocultando o ID e se a oportunidade esta aberta, na página de Oportunidades
   display: none;
 }
 
-/** 
+/**
 Ocultando os ícones de compartilhar da tela da oportunidade
 */
 
@@ -91,7 +91,7 @@ Ocultando os ícones de compartilhar da tela da oportunidade
   display: none;
 }
 
-/** 
+/**
 Ocultando o ID e tipo, na página de Oportunidades
 */
 
@@ -99,7 +99,7 @@ Ocultando o ID e tipo, na página de Oportunidades
   display: none !important;
 }
 
-/** 
+/**
 Ocultando o título Publicado por na tela da oportunidade
 */
 
@@ -107,7 +107,7 @@ Ocultando o título Publicado por na tela da oportunidade
   display: none;
 }
 
-/** 
+/**
 Ocultando os botões de Denúncia e Contato
 */
 
@@ -115,7 +115,7 @@ Ocultando os botões de Denúncia e Contato
   display: none;
 }
 
-/** 
+/**
 Ocultando a parte de selos na tela da oportunidade
 */
 
@@ -123,7 +123,7 @@ Ocultando a parte de selos na tela da oportunidade
   display: none;
 }
 
-/** 
+/**
 Ocultando a parte de área de interesse
 */
 
@@ -131,7 +131,7 @@ Ocultando a parte de área de interesse
   display: none;
 }
 
-/** 
+/**
 Ocultando termos dos cards de Oportunidades
 */
 
@@ -150,7 +150,7 @@ Ocultando termos dos cards de Oportunidades
   display: none;
 }
 
-/** 
+/**
 Melhorando a exibição da imagem em destaque da home
 */
 .home-header__content {
@@ -293,3 +293,8 @@ Melhorando a exibição da imagem em destaque da home
     height: auto;
   }
 }
+.mc-header-menu {
+  display: none;
+}
+
+
