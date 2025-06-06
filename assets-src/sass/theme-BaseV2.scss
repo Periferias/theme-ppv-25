@@ -64,11 +64,13 @@ $low-500: #00318C;
 @import '../../../BaseV2/assets-src/sass/theme-BaseV2';
 
 .mc-header-logo {
-    max-width: 9rem;
+  max-width: 9rem;
 }
+
 .main-footer__reg {
   display: none;
 }
+
 .topo-togov-wrapper {
   display: none;
 }
@@ -93,7 +95,7 @@ Ocultando os ícones de compartilhar da tela da oportunidade
 Ocultando o ID e tipo, na página de Oportunidades
 */
 
-.metadata > dl {
+.metadata>dl {
   display: none !important;
 }
 
@@ -125,7 +127,7 @@ Ocultando a parte de selos na tela da oportunidade
 Ocultando a parte de área de interesse
 */
 
-.flex-container > .entity-terms {
+.flex-container>.entity-terms {
   display: none;
 }
 
@@ -138,7 +140,10 @@ Ocultando termos dos cards de Oportunidades
 .base-v2.controller-site.action-index.layout-default .entity-card__header.user-details .user-info.with-labels span {
   display: none;
 }
+.entity-card__header.user-details {
+    align-items: center;
 
+}
 .base-v2.controller-site.action-index.layout-default .search__header,
 .base-v2.controller-site.action-index.layout-default .tabs-component__header,
 .base-v2.controller-site.action-index.layout-default .search-list__order {
@@ -151,7 +156,7 @@ Melhorando a exibição da imagem em destaque da home
 .home-header__content {
   background: none;
 }
-  
+
 .home-header__content::before {
   content: "";
   position: absolute;
@@ -162,22 +167,128 @@ Melhorando a exibição da imagem em destaque da home
   background: none;
   z-index: 2;
 }
+
 .home-header__background .img {
   min-width: auto;
 }
+
 .home-header__content {
   min-width: auto;
 }
 
-@media (max-width: 31.25rem) {
-.home-header__content {
-  min-height: 8rem;
+.entity-card {
+  background-color: #F2F2F2;
+  width: 100%;
+  box-shadow: 0em 1em 2em -1em black;
+  user-select: none;
+  width: 100%;
+
 }
+
+.mc-header-menu-user__desktop .user:before,
+.mc-header-menu-user__mobile .user:before {
+  background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuNSA2Ljc1TDkgMTEuMjVMMTMuNSA2Ljc1IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K") no-repeat 50%/contain;
+}
+
+.main-footer__content {
+  width: 100%;
+  display: flex;
+
+}
+
+.entity-card__registration {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button--primary {
+  padding: 1rem 0.5rem;
+  background-color: #4F87EB;
+  border: .125rem solid #4F87EB;
+
+}
+.entity-card__footer {
+    gap: 1.5rem 0;
+    flex-direction: column;
+
+}
+.entity-card__footer--action .button {
+    display: flex;
+
+}
+.main-footer {
+    background: #F2F2F2;
+}
+
+.inscricoes-btn {
+    display: block;
+    color: #00AE00;
+    background-color: #fff;
+    border: 1px solid #00AE00;
+    border-radius: 8px;
+    padding: 0.5rem;
+    gap: 0.2rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.inscricoes-btn.orange {
+    color: #000;
+    background-color: #FFDAAD;
+    border: none;
+}
+
+.inscricoes-btn.disabled {
+    color: #8B8B8B;
+    background-color: #D4D4D4;
+    border: 1px solid #8B8B8B;
+}
+
+.entity-card__header.user-details .user-info a {
+    color: #000;
+}
+
+.entity-card__header.user-details .user-info.without-labels span {
+    display: none;
+}
+
+    .footer-mobile {
+        text-align: center;
+
+    }
+.footer-mobile a{
+    text-decoration: underline;
+}
+    .footer-mobile a,
+    .footer-mobile p {
+        color: #000;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+    .main-footer__content--links {
+        display: none;
+    }
+@media (max-width:37.5rem) {
+
+  .mc-avatar--medium {
+    height: 5rem;
+    min-height: 5rem;
+    min-width: 5rem;
+    width: 5rem
+  }
+}
+
+@media (max-width: 31.25rem) {
+  .home-header__content {
+    min-height: 8rem;
+  }
+
   .home-header__background {
     height: auto;
   }
 
-  .home-header__background .img > img {
+  .home-header__background .img>img {
     width: 100%;
     height: auto;
   }
