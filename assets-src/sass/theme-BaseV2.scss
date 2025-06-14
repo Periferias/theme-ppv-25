@@ -312,3 +312,20 @@ Melhorando a exibição da imagem em destaque da home
 .opportunity-header__content .left .title__info {
   display: none;
 }
+
+/** 
+Trocando o termo Link por um texto melhor na visão geral da Oportunidade
+*/
+.action-single .entity-links__title {
+    color: transparent;
+    position: relative;
+}
+
+.action-single .entity-links__title::after {
+    content: "Confira o edital do prêmio";
+    color: black;
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+}
