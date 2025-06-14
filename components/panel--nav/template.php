@@ -68,7 +68,7 @@ $this->import('
         </ul>
     </template>
     <div class="panel-nav">
-        <li><mc-link :entity='entity' icon><?= i::__('Meu Perfil') ?></mc-link></li>
+        <li><mc-link :entity='entity' route='https://interativo-mapadasperiferias.cidades.gov.br/nos-perifericos/meu-cadastro' icon><?= i::__('Meu Perfil') ?></mc-link></li>
         <li><mc-link route='auth/logout' icon="logout"><?= i::__('Sair') ?></mc-link></li>
     </div>
 </nav>
