@@ -140,10 +140,12 @@ Ocultando termos dos cards de Oportunidades
 .base-v2.controller-site.action-index.layout-default .entity-card__header.user-details .user-info.with-labels span {
   display: none;
 }
+
 .entity-card__header.user-details {
-    align-items: center;
+  align-items: center;
 
 }
+
 .base-v2.controller-site.action-index.layout-default .search__header,
 .base-v2.controller-site.action-index.layout-default .tabs-component__header,
 .base-v2.controller-site.action-index.layout-default .search-list__order {
@@ -189,87 +191,116 @@ Melhorando a exibição da imagem em destaque da home
 .mc-header-menu-user__mobile .user:before {
   background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuNSA2Ljc1TDkgMTEuMjVMMTMuNSA2Ljc1IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K") no-repeat 50%/contain;
 }
-
+.mc-header-menu-user__desktop .user{
+  display: flex;
+}
+.mc-header-menu-user__desktop .user__avatar,
+.mc-header-menu-user__mobile .user__avatar{
+  border: none;
+}
+.mc-header-menu__btn-mobile .iconify{
+  color: black;
+}
+.search__tabs .tabs-component__panels{
+  background: none;
+}
 .main-footer__content {
   width: 100%;
   display: flex;
-
+  align-items: center;
 }
 
 .entity-card__registration {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
 }
 
 .button--primary {
-  padding: 1rem 0.5rem;
   background-color: #4F87EB;
   border: .125rem solid #4F87EB;
 
 }
+
 .entity-card__footer {
-    gap: 1.5rem 0;
-    flex-direction: column;
+  gap: 1.5rem 0;
+  flex-direction: column;
 
 }
+
 .entity-card__footer--action .button {
-    display: flex;
+  display: flex;
 
 }
+
 .main-footer {
-    background: #F2F2F2;
+  background: #F2F2F2;
 }
 
 .inscricoes-btn {
-    display: block;
-    color: #00AE00;
-    background-color: #fff;
-    border: 1px solid #00AE00;
-    border-radius: 8px;
-    padding: 0.5rem;
-    gap: 0.2rem;
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
+  display: block;
+  color: #00AE00;
+  background-color: #fff;
+  border: 1px solid #00AE00;
+  border-radius: 8px;
+  padding: 0.5rem;
+  gap: 0.2rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  max-width: 9rem;
 }
 
 .inscricoes-btn.orange {
-    color: #000;
-    background-color: #FFDAAD;
-    border: none;
+  color: #000;
+  background-color: #FFDAAD;
+  border: none;
+  max-width: 12rem;
 }
 
 .inscricoes-btn.disabled {
-    color: #8B8B8B;
-    background-color: #D4D4D4;
-    border: 1px solid #8B8B8B;
+  color: #8B8B8B;
+  background-color: #D4D4D4;
+  border: 1px solid #8B8B8B;
 }
 
 .entity-card__header.user-details .user-info a {
-    color: #000;
+  color: #000;
 }
 
 .entity-card__header.user-details .user-info.without-labels span {
-    display: none;
+  display: none;
 }
 
-    .footer-mobile {
-        text-align: center;
+.footer-mobile {
+  text-align: center;
 
-    }
-.footer-mobile a{
-    text-decoration: underline;
 }
-    .footer-mobile a,
-    .footer-mobile p {
-        color: #000;
-        font-weight: 600;
-        font-size: 1rem;
-    }
-    .main-footer__content--links {
-        display: none;
-    }
-@media (max-width:37.5rem) {
+
+.footer-mobile a {
+  text-decoration: underline;
+}
+
+.footer-mobile a,
+.footer-mobile p {
+  color: #000;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.main-footer__content--links,
+.mc-header-menu-user__desktop .user__name {
+  display: none;
+}
+.main-footer__content--logo-img .theme-logo{
+  width: 100%;
+  display: block;
+}
+.main-footer__content--logo-img .theme-logo img{
+      max-width: 20rem;
+}
+
+@media (max-width:768px) {
 
   .mc-avatar--medium {
     height: 5rem;
@@ -277,9 +308,22 @@ Melhorando a exibição da imagem em destaque da home
     min-width: 5rem;
     width: 5rem
   }
+
+  .entity-card__registration {
+    flex-direction: row;
+  }
+
+  .button--primary {
+    padding: 1rem 0.5rem;
+
+  }
+      .search__tabs--list .search-list .entity-card__header {
+        flex-direction: row;
+      }
+
 }
 
-@media (max-width: 31.25rem) {
+@media (max-width: 425px) {
   .home-header__content {
     min-height: 8rem;
   }
@@ -292,19 +336,25 @@ Melhorando a exibição da imagem em destaque da home
     width: 100%;
     height: auto;
   }
+  .entity-card__registration {
+        flex-direction: column;
+    }
 }
+
 .mc-header-menu {
   display: none;
 }
 
 .panel-nav__right h3,
-.panel-nav__right > ul, 
+.panel-nav__right>ul,
 .panel-nav__right .panel-nav__line {
   display: none;
 }
+
 .entity-related-agents {
   display: none;
 }
+
 .mc-breadcrumb {
   display: none;
 }
