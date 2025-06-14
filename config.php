@@ -16,4 +16,19 @@ return [
     ex: `img/meu-home-header-background.jpg` (pasta assets/img/meu-home-header-background.jpg do tema)
     */
     'homeHeader.background' => './img/home-header/home-header2.jpg',
+    'auth.provider' => 'MapasCulturais\AuthProviders\OpauthAuthentik',
+    'auth.config' => [
+        'login_url' => 'https://dev-backend.100.28.135.68.sslip.io',
+        'logout_url' => 'https://dev-backend.100.28.135.68.sslip.io/o/profile/',
+        'redirect_uri' => 'https://ppv-25.mapadasperiferias.com/autenticacao/authentik/oauth2callback',
+        'auth_endpoint' => '/o/authorize/',
+        'token_endpoint' => '/o/token/',
+        'user_info_endpoint' => '/o/userinfo/',
+        'salt' => env('AUTH_SALT', 'SECURITY_SALT'),
+        'timeout' => '24 hours',
+        'client_id' => env('AUTH_AUTHENTIK_APP_ID', ''),
+        'client_secret' => env('AUTH_AUTHENTIK_APP_SECRET', ''),
+        'scope' => env('AUTH_AUTHENTIK_SCOPE', 'read write profile'),
+    ]
+
 ];
