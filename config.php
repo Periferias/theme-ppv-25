@@ -102,6 +102,6 @@ return [
         'client_id' => env('AUTH_AUTHENTIK_APP_ID', ''),
         'client_secret' => env('AUTH_AUTHENTIK_APP_SECRET', ''),
         'scope' => env('AUTH_AUTHENTIK_SCOPE', 'read write profile'),
-    ]
+    ],
 
 ];
