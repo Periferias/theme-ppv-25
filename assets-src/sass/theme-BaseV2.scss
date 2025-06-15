@@ -330,7 +330,7 @@ Trocando o termo Link por um texto melhor na visão geral da Oportunidade
     white-space: nowrap;
 }
 
-// Ajusta altura da linha do título do Formulário de inscrição para dispositivos mobile 
+// Ajusta altura da linha do título (espaçmento vertical) do Formulário de inscrição para dispositivos mobile 
 @media screen and (max-width: 50rem) {
   .controller-registration .registration.edit .registration__title {
     line-height: 3.3rem; 
