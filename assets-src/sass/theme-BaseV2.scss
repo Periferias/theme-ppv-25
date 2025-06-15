@@ -329,3 +329,13 @@ Trocando o termo Link por um texto melhor na visão geral da Oportunidade
     top: 0;
     white-space: nowrap;
 }
+
+.controller-registration .registration__title {
+  display: none;
+}
+.controller-registration .opportunity-header__content {
+  padding: 1em;
+}
+div.panel-nav__right:nth-child(6) > li:nth-child(2) {
+  display: none;
+}
