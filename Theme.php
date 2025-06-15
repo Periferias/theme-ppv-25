@@ -17,6 +17,10 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme {
 
         $app = App::i();
 
+        $app->hook('template(<<*>>.head):end', function () {
+            $this->part('google-analytics--script');
+        });
+
         // Manifest do five icon
         $app->hook('GET(site.webmanifest)', function() use ($app) {
             /** @var \MapasCulturais\Controller $this */
