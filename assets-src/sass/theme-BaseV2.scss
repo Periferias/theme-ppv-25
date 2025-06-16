@@ -207,6 +207,7 @@ Melhorando a exibição da imagem em destaque da home
 .entity-card__registration {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .button--primary {
@@ -275,7 +276,7 @@ Melhorando a exibição da imagem em destaque da home
   display: none;
 }
 .main-footer__content {
-  margin: 0;
+  margin: 0 !important;
 }
 @media (max-width:37.5rem) {
     .search__tabs--list .search-list .entity-card__header.title {
