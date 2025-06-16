@@ -311,11 +311,18 @@ Melhorando a exibição da imagem em destaque da home
   display: none;
 }
 
+.panel-nav__left,
+.vertical__line,
 .panel-nav__right h3,
 .panel-nav__right > ul, 
 .panel-nav__right .panel-nav__line {
   display: none;
 }
+// div.panel-nav__right:nth-child(6) > li:nth-child(2) {
+//   display: none;
+// }
+
+
 .entity-related-agents {
   display: none;
 }
@@ -367,10 +374,7 @@ Trocando o termo Link por um texto melhor na visão geral da Oportunidade
   display: none;
 }
 .controller-registration .opportunity-header__content {
-  padding: 1em;
-}
-div.panel-nav__right:nth-child(6) > li:nth-child(2) {
-  display: none;
+  padding: 1em 1em 3em;
 }
 
 

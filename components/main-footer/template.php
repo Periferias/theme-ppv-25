@@ -16,9 +16,9 @@ $config = $app->config['social-media'];
 <div v-if="globalState.visibleFooter" class="main-footer grid-12">
     <?php $this->applyTemplateHook("main-footer", "begin") ?>
     <div class="main-footer__content col-6">
-            <a class="theme-logo" :class="{'onlyImg': hideLabel}" :style="{'--logo-bg1': first_color, '--logo-bg2': second_color, '--logo-bg3': third_color, '--logo-bg4': fourth_color}" :href="href">
+            <a class="theme-logo" href="/">
                 <?php $image_url = $app->view->asset('img/logos-oficiais.png', false); ?>
-                <img src="<?= $image_url ?>" alt="Logo Funarte" />
+                <img src="<?= $image_url ?>" alt="Logos" />
             </a>
     </div>
 
