@@ -143,7 +143,8 @@ Ocultando termos dos cards de Oportunidades
   display: none;
 }
 .entity-card__header.user-details {
-    align-items: center;
+    gap: 1rem;
+    flex-direction: column;
 
 }
 .base-v2.controller-site.action-index.layout-default .search__header,
@@ -186,17 +187,22 @@ Melhorando a exibição da imagem em destaque da home
   width: 100%;
 
 }
-
+.entity-card.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 24rem;
+}
+.entity-card__header.title{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  align-self: flex-start;
+}
 .mc-header-menu-user__desktop .user:before,
 .mc-header-menu-user__mobile .user:before {
   background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuNSA2Ljc1TDkgMTEuMjVMMTMuNSA2Ljc1IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K") no-repeat 50%/contain;
 }
-
-// .main-footer__content {
-//   width: 100%;
-//   display: flex;
-
-// }
 
 .entity-card__registration {
   display: flex;
@@ -344,7 +350,7 @@ div.panel-nav__right:nth-child(6) > li:nth-child(2) {
     background: #F2F2F2;
 }
 .main-footer__content {
-  margin: auto;
+  margin: 0;
   max-width: none;
   width: auto;
 }
