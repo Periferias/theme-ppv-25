@@ -278,7 +278,9 @@ Melhorando a exibição da imagem em destaque da home
   margin: 0;
 }
 @media (max-width:37.5rem) {
-
+    .search__tabs--list .search-list .entity-card__header.title {
+        flex-direction: row;
+    }
   .mc-avatar--medium {
     height: 5rem;
     min-height: 5rem;
