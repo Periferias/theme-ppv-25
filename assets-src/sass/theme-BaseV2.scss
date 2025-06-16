@@ -329,6 +329,25 @@ Trocando o termo Link por um texto melhor na visão geral da Oportunidade
     white-space: nowrap;
 }
 
+// Ajusta altura da linha do título (espaçmento vertical) do Formulário de inscrição para dispositivos mobile 
+@media screen and (max-width: 50rem) {
+  .controller-registration .registration.edit .registration__title {
+    line-height: 3.3rem; 
+  }
+}
+
+// Media query que atinge iPhones (SE até 14 Pro Max), sem afetar Androids ou desktops
+@media screen
+  and (max-device-width: 26.875rem)          // 430px em rem
+  and (hover: none)                          // Apenas dispositivos touch
+  and (pointer: coarse)                      // Ponteiro grosso (dedo)
+  and (-webkit-min-device-pixel-ratio: 2) {  // Telas Retina (iPhones)
+
+  .field__checkbox > span {
+    margin-left: 0.5rem; // Ajuste para iPhones
+  }
+}
+
 .controller-registration .registration__title {
   display: none;
 }
