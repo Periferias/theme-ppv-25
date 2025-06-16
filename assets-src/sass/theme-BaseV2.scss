@@ -191,7 +191,6 @@ Melhorando a exibição da imagem em destaque da home
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 24rem;
 }
 .entity-card__header.title{
   display: flex;
@@ -207,7 +206,7 @@ Melhorando a exibição da imagem em destaque da home
 .entity-card__registration {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  flex-direction: column;
 }
 
 .button--primary {
@@ -278,6 +277,9 @@ Melhorando a exibição da imagem em destaque da home
 .main-footer__content {
   margin: 0 !important;
 }
+.search__tabs .tabs-component__panels {
+  background-color: #fff;
+}
 @media (max-width:37.5rem) {
     .search__tabs--list .search-list .entity-card__header.title {
         flex-direction: row;
@@ -288,9 +290,11 @@ Melhorando a exibição da imagem em destaque da home
     min-width: 5rem;
     width: 5rem
   }
-  .entity-card.container {
-    min-width: auto;
+  .entity-card__registration {
+    flex-direction: row;
+    gap: 1rem;
   }
+
 }
 
 @media (max-width: 31.25rem) {
