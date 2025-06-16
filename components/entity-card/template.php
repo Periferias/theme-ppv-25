@@ -13,42 +13,27 @@ $this->import('
 	mc-title
 ');
 ?>
-<div class="entity-card" :class="classes">
+<div class="entity-card container" :class="classes">
 	<div class="entity-card__header" :class="{'with-labels': useLabels, 'without-labels': !useLabels}">
 		<div class="entity-card__header user-details">
-			<slot name="avatar">
-				<mc-avatar :entity="entity" size="small"></mc-avatar>
-			</slot>
-			<div class="user-info" :class="{'with-labels': useLabels, 'without-labels': !useLabels}">
-				<a :href="entity.singleUrl">
-					<slot name="title">
-						<mc-title tag="h2" :shortLength="55" :longLength="71" class="bold">{{entity.name}}</mc-title>
-					</slot>
-				</a>
-				<slot name="type">
-					<div v-if="entity.type" class="user-info__attr">
-						<?php i::_e('Tipo:') ?> {{entity.type.name}}
-					</div>
+			<div class="entity-card__header title">
+				<slot name="avatar">
+					<mc-avatar :entity="entity" size="small"></mc-avatar>
 				</slot>
-			</div>
-		</div>
-
-		<div class="entity-card__header user-slot">
-			<slot name="labels">
-				<div class="entity-card__slot" :class="{'no-id' : !global.showIds[entity.__objectType]}">
-					<span v-if="global.showIds[entity.__objectType]" class="uppercase semibold entity-card__id">Id: <span class="bold">{{entity.id}}</span> </span>
-					<span class="openSubscriptions" v-if="openSubscriptions"> <mc-icon name="circle-checked"></mc-icon> <?= i::__('Inscrições Abertas') ?> </span>
+				<div class="user-info" :class="{'with-labels': useLabels, 'without-labels': !useLabels}">
+					<a :href="entity.singleUrl">
+						<slot name="title">
+							<mc-title tag="h2" :shortLength="55" :longLength="71" class="bold">{{entity.name}}</mc-title>
+						</slot>
+					</a>
+					<slot name="type">
+						<div v-if="entity.type" class="user-info__attr">
+							<?php i::_e('Tipo:') ?> {{entity.type.name}}
+						</div>
+					</slot>
 				</div>
-			</slot>
-		</div>
-	</div>
-
-	<div class="entity-card__content">
-		<div v-if="entity.__objectType=='space' && entity.endereco" class="entity-card__content--description">
-			<label class="entity-card__content--description-local"><?= i::_e('ONDE: ') ?></label> <strong class="entity-card__content--description-adress">{{entity.endereco}}</strong>
-		</div>
-
-		<template v-if="entity.__objectType=='opportunity'">
+			</div>
+			<template v-if="entity.__objectType=='opportunity'">
 			<!-- inscrições abertas -->
 			<div v-if="showEndDateText" class="entity-card__registration">
 				<button class="inscricoes-btn"><svg width="12" height="12" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,11 +53,27 @@ $this->import('
 			</div>
 			<!-- inscrições passadas -->
 			<div v-if="entity.registrationTo?.isPast()" class="entity-card__registration">
-				<p :class="[entity.__objectType+'__color', 'bold', {'small' : $media('max-width: 500px')}]">
-					<?= i::__('As inscrições encerraram no dia') ?> {{entity.registrationTo?.date('2-digit year')}} <?= i::__('às') ?> {{entity.registrationTo?.time()}}
-				</p>
+				<button class="inscricoes-btn disabled">Inscrições encerradas</button>
 			</div>
 		</template>
+		</div>
+
+		<div class="entity-card__header user-slot">
+			<slot name="labels">
+				<div class="entity-card__slot" :class="{'no-id' : !global.showIds[entity.__objectType]}">
+					<span v-if="global.showIds[entity.__objectType]" class="uppercase semibold entity-card__id">Id: <span class="bold">{{entity.id}}</span> </span>
+					<span class="openSubscriptions" v-if="openSubscriptions"> <mc-icon name="circle-checked"></mc-icon> <?= i::__('Inscrições Abertas') ?> </span>
+				</div>
+			</slot>
+		</div>
+	</div>
+
+	<div class="entity-card__content">
+		<div v-if="entity.__objectType=='space' && entity.endereco" class="entity-card__content--description">
+			<label class="entity-card__content--description-local"><?= i::_e('ONDE: ') ?></label> <strong class="entity-card__content--description-adress">{{entity.endereco}}</strong>
+		</div>
+
+		
 
 
 
