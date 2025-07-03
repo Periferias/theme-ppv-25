@@ -64,7 +64,7 @@ $term_url = $app->createUrl('site', 'termoAdesao');
                     </button>
                 </template>
                 <template #message="message">
-                    <?php i::_e('Ao enviar sua inscrição você já estará participando da oportunidade.') ?>
+                    <?php i::_e('Ao enviar sua inscrição você já estará participando do Prêmio Periferia Viva 2025.') ?>
                 </template>
             </mc-confirm-button>
         </div>
