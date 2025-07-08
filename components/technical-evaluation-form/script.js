@@ -169,11 +169,8 @@ app.component('technical-evaluation-form', {
         },
 
         formatNumber(value) {
-            // Converte float para string com no máximo 2 decimais
             if (value === null || value === undefined) return '';
-            if (Number.isInteger(value)) return value.toString();
-            // Remove zeros finais se existirem (ex: 2.50 -> 2.5)
-            return value.toFixed(2).replace(/\.?0+$/, '').replace('.', ',');
+            return value.toFixed(2).replace('.', ',');
         }
 
         
