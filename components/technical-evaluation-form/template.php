@@ -33,6 +33,7 @@ $this->import('
 
     <div class="tecnical-evaluation-form__textarea">
         <h4 class="bold"><?php i::_e('Parecer técnico') ?></h4>
+        <p><?php i::_e('O parecer técnico é de preenchimento obrigatório e ficará disponível para ser visualizado pela pessoa proponente na divulgação do resultado.') ?></p>
         <textarea v-if="isEditable" v-model="formData.data.obs"></textarea>
         <textarea v-if="!isEditable" disabled>{{formData.data.obs}}</textarea>
     </div>
