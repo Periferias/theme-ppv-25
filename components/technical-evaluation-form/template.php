@@ -17,8 +17,40 @@ $this->import('
             <div class="field tecnical-evaluation-form__maxScore grid-12">
                 <label> 
                     <strong>{{ criterion.title }}</strong>
-                    <input class="maxScore-input" v-if="isEditable" v-model="formData.data[criterion.id]" min="0" step="0.25" type="number" @input="handleInput(sectionIndex, criterion.id)">
-                    <input class="maxScore-input" v-if="!isEditable" disabled min="0" step="0.25" type="number" :value="formData.data[criterion.id]" @input="handleInput(sectionIndex, criterion.id)">
+
+                    <!-- Campo editável com nota de 0 até max em incrementos de 0.25 -->
+                    <select
+                        class="maxScore-input"
+                        v-if="isEditable"
+                        v-model="formData.data[criterion.id]"
+                        @change="handleInput(sectionIndex, criterion.id)"
+                    >
+                        <option disabled value=""><?= i::__('Selecione uma nota') ?></option>
+                        <option
+                            v-for="i in Math.floor(criterion.max / 0.25) + 1"
+                            :key="i"
+                            :value="(i - 1) * 0.25"
+                        >
+                            {{ formatNumber((i - 1) * 0.25) }}
+                        </option>
+                    </select>
+
+                    <!-- Campo não editável -->
+                    <select
+                        class="maxScore-input"
+                        v-if="!isEditable"
+                        :value="formData.data[criterion.id]"
+                        disabled
+                    >
+                        <option disabled value=""><?= i::__('Selecione uma nota') ?></option>
+                        <option
+                            v-for="i in Math.floor(criterion.max / 0.25) + 1"
+                            :key="i"
+                            :value="(i - 1) * 0.25"
+                        >
+                            {{ formatNumber((i - 1) * 0.25) }}
+                        </option>
+                    </select>
                 </label>
             </div>
             <div class="grid-12">
@@ -42,14 +74,27 @@ $this->import('
         <h4 class="bold"><?php i::_e('Exequibilidade orçamentária') ?></h4>
         <p><?php i::_e('Esta proposta está adequada ao orçamento apresentado? Os custos orçamentários estão compatíveis com os praticados no mercado?') ?></p>
         <label>
-            <span v-if="isEditable"> <input v-model="formData.data.viability" type="radio" name="confirmation" value='valid' /> <?php i::_e('Sim') ?> </span>
-            <span v-if="!isEditable"> <input type="radio" name="confirmation" value="valid" disabled :checked="formData.data.viability == 'valid'"/> <?php i::_e('Sim') ?> </span>
+            <span v-if="isEditable">
+                <input v-model="formData.data.viability" type="radio" name="confirmation" value='valid' />
+                <?php i::_e('Sim') ?>
+            </span>
+            <span v-if="!isEditable">
+                <input type="radio" name="confirmation" value="valid" disabled :checked="formData.data.viability == 'valid'" />
+                <?php i::_e('Sim') ?>
+            </span>
         </label>
         <label>
-            <span v-if="isEditable"> <input v-model="formData.data.viability" type="radio" name="confirmation" value='invalid' /> <?php i::_e('Não') ?> </span>
-            <span v-if="!isEditable"> <input type="radio" name="confirmation" value="invalid" disabled :checked="formData.data.viability == 'invalid'"/> <?php i::_e('Não') ?> </span>
+            <span v-if="isEditable">
+                <input v-model="formData.data.viability" type="radio" name="confirmation" value='invalid' />
+                <?php i::_e('Não') ?>
+            </span>
+            <span v-if="!isEditable">
+                <input type="radio" name="confirmation" value="invalid" disabled :checked="formData.data.viability == 'invalid'" />
+                <?php i::_e('Não') ?>
+            </span>
         </label>
     </div>
+
     <div class="tecnical-evaluation-form__results">
         <div>
             <h4><?php i::_e('Pontuação total: ') ?><strong>{{ formatNumber(notesResult) }}</strong></h4>
