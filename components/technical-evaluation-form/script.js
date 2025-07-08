@@ -1,5 +1,3 @@
-console.log("✅ [Tema PeriferiaViva25] script.js de avaliação técnica carregado");
-
 app.component('technical-evaluation-form', {
     template: $TEMPLATES['technical-evaluation-form'],
 
@@ -49,8 +47,7 @@ app.component('technical-evaluation-form', {
             return $MAPAS.config.technicalEvaluationForm.enableViability;
         },
         sections() {
-            // Como vimos, sections é objeto com chaves dinâmicas, então convertemos para array
-            return Object.values($MAPAS.config.technicalEvaluationForm.sections);
+            return Object.values($MAPAS.config.technicalEvaluationForm.sections || {});
         },
         userId() {
             return $MAPAS.userId;
@@ -61,28 +58,28 @@ app.component('technical-evaluation-form', {
         currentEvaluation() {
             return $MAPAS.config.technicalEvaluationForm.currentEvaluation;
         },
+
         notesResult() {
             let result = 0;
             for (let section of this.sections) {
                 for (let criterion of section.criteria) {
                     const value = this.formData.data[criterion.id];
-                    const weight = criterion.weight || 1;
                     if (value !== null && value !== undefined) {
-                        result += parseFloat(value) * parseFloat(weight);
+                        result += parseFloat(value) * (criterion.weight || 1);
                     }
                 }
             }
             return parseFloat(result.toFixed(2));
         },
+
         totalMaxScore() {
             let total = 0;
             for (let section of this.sections) {
                 if (section.criteria && Array.isArray(section.criteria)) {
-                    total += section.criteria.reduce((acc, criterion) => {
-                        const max = parseFloat(criterion.max || 0);
-                        const weight = parseFloat(criterion.weight || 1);
-                        return acc + (max * weight);
-                    }, 0);
+                    total += section.criteria.reduce(
+                        (acc, criterion) => acc + ((criterion.max || 0) * (criterion.weight || 1)),
+                        0
+                    );
                 }
             }
             return parseFloat(total.toFixed(2));
@@ -92,7 +89,8 @@ app.component('technical-evaluation-form', {
     methods: {
         handleInput(sectionIndex, criterionId) {
             let value = this.formData.data[criterionId];
-            const max = this.sections[sectionIndex].criteria.find(criterion => criterion.id === criterionId).max;
+            const criterion = this.sections[sectionIndex].criteria.find(c => c.id === criterionId);
+            const max = criterion ? criterion.max : null;
 
             if (value === null || value === undefined || value === '') {
                 this.messages.error(this.text('mandatory-note'));
@@ -112,9 +110,8 @@ app.component('technical-evaluation-form', {
             const section = this.sections[sectionIndex];
             for (let criterion of section.criteria) {
                 const value = this.formData.data[criterion.id];
-                const weight = criterion.weight || 1;
                 if (value !== null && value !== undefined) {
-                    subtotal += parseFloat(value) * parseFloat(weight);
+                    subtotal += parseFloat(value) * (criterion.weight || 1);
                 }
             }
             return parseFloat(subtotal.toFixed(2));
@@ -129,7 +126,7 @@ app.component('technical-evaluation-form', {
                     let sectionName = this.sections[sectionIndex].name;
                     let value = this.formData.data[crit.id];
                     
-                    if ((value === null || value === undefined || value === '') && value !== 0) {
+                    if (value === null || value === undefined || value === '') {
                         this.messages.error(`${this.text('on_section')} ${sectionName}, ${this.text('the_field')} ${crit.title} ${this.text('is_required')}`);
                         isValid = true;
                     }
@@ -162,7 +159,7 @@ app.component('technical-evaluation-form', {
         },
 
         handleCurrentEvaluationForm() {
-            return this.currentEvaluation?.status > 0 ? this.isEditable = false : this.isEditable = this.editable;
+            this.isEditable = this.currentEvaluation?.status > 0 ? false : this.editable;
         },
         
         skeleton() {
@@ -170,5 +167,13 @@ app.component('technical-evaluation-form', {
                 uid: this.userId,
             };
         },
+
+        formatNumber(value) {
+            // Converte float para string com no máximo 2 decimais
+            if (value === null || value === undefined) return '';
+            if (Number.isInteger(value)) return value.toString();
+            // Remove zeros finais se existirem (ex: 2.50 -> 2.5)
+            return value.toFixed(2).replace(/\.?0+$/, '').replace('.', ',');
+        }
     }
 });
