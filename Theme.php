@@ -36,5 +36,16 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme {
           header('Location: https://interativo-mapadasperiferias.cidades.gov.br/nos-perifericos/meu-cadastro');
           exit;
         });
+
+        $app->hook('before.save:registration', function(Registration $registration) {
+
+            if (isset($registration->appliedPointReward['rules']) && is_array($registration->appliedPointReward['rules'])) {
+                foreach ($registration->appliedPointReward['rules'] as &$rule) {
+                    if (!isset($rule['percentage'])) {
+                        $rule['percentage'] = 0;
+                    }
+                }
+            }
+        });
     }
 }
