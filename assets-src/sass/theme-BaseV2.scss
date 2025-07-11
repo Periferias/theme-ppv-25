@@ -63,6 +63,9 @@ $low-500: #00318C;
 
 @import '../../../BaseV2/assets-src/sass/theme-BaseV2';
 
+html, body{
+  overflow-x: hidden;
+}
 .mc-header-logo {
   max-width: 9rem;
 }
