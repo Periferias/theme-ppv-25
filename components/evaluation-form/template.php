@@ -22,7 +22,7 @@ $infos = (array) $opportunity->evaluationMethodConfiguration->infos;
 
 <div class="registration__actions">
     <div ref=header>
-        <h2 class="regular primary__color"><?= i::__("Formulário de Avaliação") ?> <!--strong><?= $evaluation_method_config_name ?></strong--></h2>
+        <h2 class="regular primary__color"><?= i::__("Formulário de Avaliação") ?></h2>
         <?php if (!empty($infos["general"])): ?>
             <registration-evaluation-info :entity="entity"></registration-evaluation-info>
         <?php endif; ?>
