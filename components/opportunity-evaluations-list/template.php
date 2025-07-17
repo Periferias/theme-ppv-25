@@ -61,7 +61,17 @@ $this->import('
                                     <small>{{evaluation.agentsData?.['owner']?.name}}</small>
                                 </span>
                             </div>
-
+                            
+                            <div class="owner">
+                                <span>
+                                    <small class="bold"><?= i::__('Nome da iniciativa') ?></small>
+                                </span>
+                                <span>
+                                    <small v-if="evaluation.projectName">{{evaluation.projectName}}</small>
+                                    <small v-if="!evaluation.projectName"><?= i::__("Nome do projeto não informado") ?></small>
+                                </span>
+                            </div>
+                           
                             <div class="coletive" v-if="evaluation.agentsData?.['coletivo']?.nomeCompleto">
                             <span>
                                 <small class="bold"><?= i::__('Agente coletivo') ?></small>
