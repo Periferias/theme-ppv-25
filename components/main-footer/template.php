@@ -25,6 +25,7 @@ $config = $app->config['social-media'];
     <div class="main-footer__contact col-6">
         <p>Contato</p>
         <p><a href="mailto:premio.periferiaviva@cidades.gov.br">premio.periferiaviva@cidades.gov.br</a></p>
+        <p><a href="https://wa.me/6191584291"> WhatsApp: (61) 9158-4291</a></p>
     </div>
 
     <?php $this->applyTemplateHook("main-footer-reg", "before") ?>
