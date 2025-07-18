@@ -47,6 +47,8 @@ $this->import('
             </li>
             <li v-if="evaluations.length > 0" v-for="evaluation in evaluations" :key="evaluation.registrationId" :class="[{'evaluation-list__card--modify': entity.id == evaluation.registrationid}, 'evaluation-list__card']">
                 <div :class="'evaluation-list__content '+colorByStatus(evaluation)">
+                    <!-- Debug: Mostrar todos os campos da evaluation -->
+
                     <a :href="evaluation.url" class="link">
                         <div class="card-header">
                             <span class="card-header__name">{{evaluation.registrationNumber}}</span>
@@ -67,10 +69,9 @@ $this->import('
                                     <small class="bold"><?= i::__('Nome da iniciativa') ?></small>
                                 </span>
                                 <span>
-                                    <small v-if="evaluation.projectName">{{evaluation.projectName}}</small>
-                                    <small v-if="!evaluation.projectName"><?= i::__("Nome do projeto não informado") ?></small>
+                                    <small>{{evaluation.projectName}}</small>
                                 </span>
-                            </div>
+                            </div>                           
                            
                             <div class="coletive" v-if="evaluation.agentsData?.['coletivo']?.nomeCompleto">
                             <span>

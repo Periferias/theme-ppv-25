@@ -68,7 +68,7 @@ app.component('opportunity-evaluations-list', {
     methods: {
         colorByStatus(evaluation) {
             let result = 'pending';
-            
+
             let eval = evaluation ? evaluation.status : null
             switch (eval) {
                 case null:
@@ -102,7 +102,8 @@ app.component('opportunity-evaluations-list', {
             this.loading = true;
             let args = {};
             args['@select'] = "id,owner.name";
-            args['registration:@select'] = "id,owner.name,sentTimestamp";
+            // 🚨🚨🚨 CORREÇÃO AQUI: Adicione 'projectName' à seleção da registration 🚨🚨🚨
+            args['registration:@select'] = "id,owner.name,sentTimestamp,projectName"; 
             args['@opportunity'] = this.entity.opportunity.id;
             args['@evaluationId'] = `${this.userEvaluatorId}`
 
@@ -121,11 +122,11 @@ app.component('opportunity-evaluations-list', {
             if (this.onlyMe) {
                 args['@onlyMe'] = true;
             }
-            
+
             if(this.entity.opportunity.avaliableEvaluationFields?.['agentsSummary']) {
                 args['registration:@select']+= ',agentsData';
             }
-            
+
             api = new API('opportunity');
             let url = api.createApiUrl('findEvaluations', args);
 
@@ -141,9 +142,12 @@ app.component('opportunity-evaluations-list', {
                         status: item?.evaluation?.status,
                         resultString: item?.evaluation?.resultString || null,
                         url: Utils.createUrl('registration', 'evaluation', [item.registration.id]),
-                        valuer: item?.valuer
+                        valuer: item?.valuer,
+                        // Pegue o 'projectName' de item.registration 
+                        projectName: item.registration?.projectName || "Nome da iniciativa não informado"
                     }
-                });
+                }); 
+
                 this.filterKeyword = false;
                 this.evaluations.sort((a, b) => (a.registrationId - b.registrationId));
                 window.dispatchEvent(new CustomEvent('evaluationRegistrationList', {detail:{evaluationRegistrationList:this.evaluations}}));
@@ -168,7 +172,7 @@ app.component('opportunity-evaluations-list', {
                     index = data.type === "nextEvaluation" ? i + 1 : i - 1;
                 }
             });
-            
+
             if (index >= 0 && index < this.evaluations.length) {
                 var url = this.evaluations[index].url.href;
                 window.location.href = url +`user:${this.userEvaluatorId}`;
@@ -224,9 +228,9 @@ app.component('opportunity-evaluations-list', {
                 case 'Selecionado' :
                 case 'Válida' :
                     return 'success__color';
-                    
-                case 'Inválida' : 
-                case 'Não selecionado' : 
+
+                case 'Inválida' :
+                case 'Não selecionado' :
 
                     return 'danger__color';
                 case 'Suplente' :
