@@ -390,3 +390,12 @@ Trocando o termo Link por um texto melhor na visão geral da Oportunidade
   max-width: none;
   width: auto;
 }
+
+// Para o funcionamento do postion sticky na página de avaliações
+body.base-v2.controller-registration.action-evaluation {
+    overflow-x: visible;
+}
+
+.action-evaluation .evaluation-form.scrollbar {
+    height: auto !important;
+}
