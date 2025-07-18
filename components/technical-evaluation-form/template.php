@@ -65,9 +65,25 @@ $this->import('
 
     <div class="tecnical-evaluation-form__textarea">
         <h4 class="bold"><?php i::_e('Parecer técnico') ?></h4>
-        <p><?php i::_e('O parecer técnico é de preenchimento obrigatório e ficará disponível para ser visualizado pela pessoa proponente na divulgação do resultado.') ?></p>
-        <textarea v-if="isEditable" v-model="formData.data.obs"></textarea>
-        <textarea v-if="!isEditable" disabled>{{formData.data.obs}}</textarea>
+        <p>
+            <?php i::_e('O parecer técnico é de preenchimento obrigatório e ficará disponível para ser visualizado pela pessoa proponente na divulgação do resultado.') ?>
+        </p>
+
+        <!-- Campo editável com limite e contador -->
+        <div v-if="isEditable">
+            <textarea
+                v-model="formData.data.obs"
+                maxlength="600"
+                @input="charCount = formData.data.obs.length"
+            ></textarea>
+            <small class="contchar">{{ charCount }}/600 caracteres</small>
+        </div>
+
+        <!-- Campo desabilitado -->
+        <div v-if="!isEditable">
+            <textarea disabled>{{ formData.data.obs }}</textarea>
+            <small class="contchar">{{ formData.data.obs.length }}/600 caracteres</small>
+        </div>
     </div>
 
     <div class="tecnical-evaluation-form__viability-radio-group" v-if="enableViability">

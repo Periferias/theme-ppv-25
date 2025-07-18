@@ -27,6 +27,9 @@ app.component('technical-evaluation-form', {
     created() {
         this.formData.data = this.evaluationData || this.skeleton();
         this.handleCurrentEvaluationForm();
+
+        // Inicia contador com valor atual do parecer
+        this.charCount = this.formData?.data?.obs?.length || 0;
     },
 
     mounted() {
@@ -39,6 +42,7 @@ app.component('technical-evaluation-form', {
             obs: '',
             viability: null,
             isEditable: true,
+            charCount: 0 // contador de caracteres do parecer técnico
         };
     },
 
@@ -96,7 +100,7 @@ app.component('technical-evaluation-form', {
                 this.messages.error(this.text('mandatory-note'));
                 return;
             }
-        
+
             if (value > max) {
                 this.messages.error(this.text('note-higher-configured'));
                 this.formData.data[criterionId] = max;
@@ -125,16 +129,21 @@ app.component('technical-evaluation-form', {
                 for (let crit of this.sections[sectionIndex].criteria) {
                     let sectionName = this.sections[sectionIndex].name;
                     let value = this.formData.data[crit.id];
-                    
+
                     if (value === null || value === undefined || value === '') {
                         this.messages.error(`${this.text('on_section')} ${sectionName}, ${this.text('the_field')} ${crit.title} ${this.text('is_required')}`);
                         isValid = true;
                     }
                 }
             }
-            
+
             if (!this.formData.data.obs) {
                 this.messages.error(this.text('technical-mandatory'));
+                isValid = true;
+            }
+
+            if (this.formData.data.obs && this.formData.data.obs.length > 600) {
+                this.messages.error(this.text('O parecer técnico deve ter no máximo 600 caracteres.'));
                 isValid = true;
             }
 
@@ -144,7 +153,7 @@ app.component('technical-evaluation-form', {
             }
 
             global.validateEvaluationErrors = isValid;
-            
+
             return isValid;
         },
 
@@ -161,7 +170,7 @@ app.component('technical-evaluation-form', {
         handleCurrentEvaluationForm() {
             this.isEditable = this.currentEvaluation?.status > 0 ? false : this.editable;
         },
-        
+
         skeleton() {
             return {
                 uid: this.userId,
@@ -172,7 +181,5 @@ app.component('technical-evaluation-form', {
             if (value === null || value === undefined) return '';
             return value.toFixed(2).replace('.', ',');
         }
-
-        
     }
 });
