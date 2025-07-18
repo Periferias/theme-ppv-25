@@ -399,3 +399,13 @@ body.base-v2.controller-registration.action-evaluation {
 .action-evaluation .evaluation-form.scrollbar {
     height: auto !important;
 }
+
+//Ajustes no campo do Parecer
+.tecnical-evaluation-form__textarea textarea {
+    width: 100%;
+    border-radius: 4px;
+}
+
+small.contchar {
+    float: right;
+}
