@@ -63,6 +63,7 @@ app.component('opportunity-evaluations-table', {
         headers () {
             let itens = [
                 { text: __('inscrição', 'opportunity-evaluations-table'), value: "number", slug: "number", sticky: true, width: '160px' },
+                { text: __('iniciativa', 'opportunity-evaluations-table'), value: "projectName", slug: "projectName"},
                 { text: __('avaliador', 'opportunity-evaluations-table'), value: "valuer?.name", slug: "evaluator", visible: true},
                 { text: __('resultado final', 'opportunity-evaluations-table'), value: "evaluation?.resultString", slug: "result"},
                 { text: __('tipo de proponente', 'opportunity-evaluations-table'), value: "proponentType", slug: "proponentType"},

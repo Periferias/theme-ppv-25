@@ -19,7 +19,7 @@ $this->import('
 
     <template v-if="!isFuture()">
         <div class="col-12">
-            <entity-table controller="opportunity" show-index :select="defaultSelect" :raw-processor="rawProcessor" :identifier="identifier" endpoint="findEvaluations" type="registration" :headers="headers" :phase="phase" :visible="['agent', 'number', 'result', 'status', 'evaluator']" :query="query" :limit="100" @clear-filters="clearFilters" @remove-filter="removeFilter($event)" :filtersDictComplement="filtersDictComplement"> 
+            <entity-table controller="opportunity" show-index :select="defaultSelect" :raw-processor="rawProcessor" :identifier="identifier" endpoint="findEvaluations" type="registration" :headers="headers" :phase="phase" :visible="['projectName', 'agent','number', 'result', 'status', 'evaluator']" :query="query" :limit="100" @clear-filters="clearFilters" @remove-filter="removeFilter($event)" :filtersDictComplement="filtersDictComplement"> 
                 <template #title>
                     <h2 v-if="isPast()"><?= i::__("As avaliações já estão encerradas") ?></h2>
                     <h2 v-if="isHappening()"><?= i::__("As avaliações estão em andamento") ?></h2>
@@ -109,9 +109,10 @@ $this->import('
                     {{getResultString(entity.evaluation?.resultString)}}
                 </template>
 
-                <template #coletivo="{entity}">
-                    <span v-if="entity.agentsData?.coletivo?.name">{{entity.agentsData?.coletivo?.name}}</span>
-                    <span v-if="!entity.agentsData?.coletivo?.name"><?= i::__("Não informado") ?></span>
+                <template #projectName="{entity}">
+                    {{entity.projectName?.resultString}}
+                    <span v-if="entity.projectName">{{entity.projectName}}</span>
+                    <span v-if="!entity.projectName"><?= i::__("Não informado") ?></span>
                 </template>
 
                 <template #status="{entity}">
