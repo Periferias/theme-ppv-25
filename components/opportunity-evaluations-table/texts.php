@@ -3,6 +3,7 @@ use MapasCulturais\i;
 
 return [
     'inscrição' => i::__('Número da inscrição'),
+    'iniciativa' => i::__('Nome da Iniciativa'),
     'agente' => i::__('Agente responsável'),
     'coletivo' => i::__('Agente coletivos'),
     'resultado final' => i::__('Resultado final da avaliação'),
