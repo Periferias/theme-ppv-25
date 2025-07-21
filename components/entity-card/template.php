@@ -34,28 +34,28 @@ $this->import('
 				</div>
 			</div>
 			<template v-if="entity.__objectType=='opportunity'">
-			<!-- inscrições abertas -->
-			<div v-if="showEndDateText" class="entity-card__registration">
-				<button class="inscricoes-btn"><svg width="12" height="12" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect x="0.5" y="1.25" width="11" height="11" rx="5.5" stroke="#00AE00" />
-						<path d="M8.66634 4.75L4.99967 8.41667L3.33301 6.75" stroke="#00AE00" stroke-linecap="round" stroke-linejoin="round" />
-					</svg> Inscrições abertas</button>
-				<button class="inscricoes-btn orange">Encerra: {{entity.registrationTo?.date('2-digit year')}} <?= i::__('às') ?> {{entity.registrationTo?.time()}}</button>
-			</div>
-
-			<!-- inscrições futuras -->
-			<div v-if="entity.registrationFrom?.isFuture() && (!entity.isContinuousFlow || (entity.isContinuousFlow && entity.hasEndDate))" class="entity-card__registration">
-				<div class="entity-card__period">
-					<p :class="[entity.__objectType+'__color', 'bold', {'small' : $media('max-width: 500px')}]" v-if="entity.registrationFrom && entity.registrationTo">
-						<?= i::__('Inscrições de') ?> {{entity.registrationFrom.date('2-digit year')}} <?= i::__('até') ?> {{entity.registrationTo.date('2-digit year')}} <?= i::__('às') ?> {{entity.registrationTo.time()}}
-					</p>
+				<!-- inscrições abertas -->
+				<div v-if="showEndDateText" class="entity-card__registration">
+					<button class="inscricoes-btn"><svg width="12" height="12" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<rect x="0.5" y="1.25" width="11" height="11" rx="5.5" stroke="#00AE00" />
+							<path d="M8.66634 4.75L4.99967 8.41667L3.33301 6.75" stroke="#00AE00" stroke-linecap="round" stroke-linejoin="round" />
+						</svg> Inscrições abertas</button>
+					<button class="inscricoes-btn orange">Encerra: {{entity.registrationTo?.date('2-digit year')}} <?= i::__('às') ?> {{entity.registrationTo?.time()}}</button>
 				</div>
-			</div>
-			<!-- inscrições passadas -->
-			<div v-if="entity.registrationTo?.isPast()" class="entity-card__registration">
-				<button class="inscricoes-btn disabled">Inscrições encerradas</button>
-			</div>
-		</template>
+
+				<!-- inscrições futuras -->
+				<div v-if="entity.registrationFrom?.isFuture() && (!entity.isContinuousFlow || (entity.isContinuousFlow && entity.hasEndDate))" class="entity-card__registration">
+					<div class="entity-card__period">
+						<p :class="[entity.__objectType+'__color', 'bold', {'small' : $media('max-width: 500px')}]" v-if="entity.registrationFrom && entity.registrationTo">
+							<?= i::__('Inscrições de') ?> {{entity.registrationFrom.date('2-digit year')}} <?= i::__('até') ?> {{entity.registrationTo.date('2-digit year')}} <?= i::__('às') ?> {{entity.registrationTo.time()}}
+						</p>
+					</div>
+				</div>
+				<!-- inscrições passadas -->
+				<div v-if="entity.registrationTo?.isPast()" class="entity-card__registration">
+					<button class="inscricoes-btn disabled">Inscrições encerradas</button>
+				</div>
+			</template>
 		</div>
 
 		<div class="entity-card__header user-slot">
@@ -73,7 +73,7 @@ $this->import('
 			<label class="entity-card__content--description-local"><?= i::_e('ONDE: ') ?></label> <strong class="entity-card__content--description-adress">{{entity.endereco}}</strong>
 		</div>
 
-		
+
 
 
 
@@ -132,12 +132,16 @@ $this->import('
 
 		<div class="entity-card__footer--action">
 			<a :href="entity.singleUrl" class="button button--primary button--large button--icon">
-				<?php i::_e('Inscrever') ?>
+				<template v-if="entity.__objectType=='opportunity' && entity.registrationTo?.isPast()">
+					<?php i::_e('Acessar') ?>
+				</template>
+				<template v-else>
+					<?php i::_e('Inscrever') ?>
+				</template>
 				<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M5 12.75H19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 					<path d="M12 5.75L19 12.75L12 19.75" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 				</svg>
-
 			</a>
 		</div>
 	</div>
