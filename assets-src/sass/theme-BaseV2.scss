@@ -281,6 +281,13 @@ Melhorando a exibição da imagem em destaque da home
 .main-footer__content {
   margin: 0 !important;
 }
+.panel-nav a{
+  color: var(--mc-primary-500);
+}
+.panel-nav a:focus, .panel-nav a:hover {
+    background-color: var(--mc-primary-500);
+    color: var(--mc-high-500) !important;
+}
 @media (max-width:37.5rem) {
     .search__tabs--list .search-list .entity-card__header.title {
         flex-direction: row;
