@@ -40,6 +40,7 @@ $this->import('
                     <ul>
                         <li><mc-link route="panel/registrations" icon="opportunity"><?= i::__('Minhas inscrições') ?></mc-link></li>
                         <li><mc-link route="panel/evaluations" icon="opportunity"><?= i::__('Minhas avaliações') ?></mc-link></li>
+                        <li v-if="global.auth.is('admin')"><mc-link route="panel/user-management" icon="opportunity"><?= i::__('Gestão de usuário') ?></mc-link></li>
                     </ul>
 
                     <?php $this->applyTemplateHook('header-menu-user--itens', 'end') ?>
