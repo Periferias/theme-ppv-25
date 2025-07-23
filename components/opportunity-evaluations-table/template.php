@@ -101,8 +101,15 @@ $this->import('
                     </div>
                 </template>
 
-                <template #number="{entity}">
-                    <a :href="createUrl(entity)">{{entity.number}}</a>
+                <template #number="{ entity }">
+                    <span>
+                        <a v-if="isToHaveEvaluationLink(entity)" :href="createUrl(entity)">
+                            {{ entity.number }}
+                        </a>
+                        <span v-else>
+                            {{ entity.number }}
+                        </span>
+                    </span>
                 </template>
 
                 <template #result="{entity}">

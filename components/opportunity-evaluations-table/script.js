@@ -131,6 +131,12 @@ app.component('opportunity-evaluations-table', {
             
             return Utils.createUrl('registration', 'evaluation', { id: entity._id, user });
         },
+        isToHaveEvaluationLink(entity) {
+            const global = useGlobalState();
+            const isAdmin = global.auth.is('admin');
+            const status = this.getStatus(entity.evaluation?.status);
+            return isAdmin && ['Avaliação iniciada', 'Avaliação enviada'].includes(status) || !isAdmin;
+        },
         canSee(action) {
             let metadata = this.valuersMetadata();
             if(metadata && metadata.summary.completed <= 0) {
