@@ -113,7 +113,7 @@ $this->import('
                 </template>
 
                 <template #result="{entity}">
-                    {{getResultString(entity.evaluation?.resultString)}}
+                    {{ formatDecimal(entity.evaluation?.resultString) }}
                 </template>
 
                 <template #projectName="{entity}">
