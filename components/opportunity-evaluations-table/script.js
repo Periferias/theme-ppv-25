@@ -271,6 +271,14 @@ app.component('opportunity-evaluations-table', {
                 this.selectedStatus = null;
                 delete this.query['status'];
             }
+        },
+        formatDecimal(value) {
+            const num = parseFloat(value);
+            if (isNaN(num)) return value;
+            return num.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
         }
     }
 });
