@@ -94,7 +94,7 @@ $this->import('
                         <div class="card-state">
                             <span class="state"><?= i::__('Resultado de avaliação') ?></span>
                             <span class="card-state__info">
-                                <mc-status v-if="evaluation.resultString" :status-name="evaluation.resultString"></mc-status>
+                                <mc-status v-if="evaluation.resultString" :status-name="formatDecimal(evaluation.resultString)"></mc-status>
                                 <mc-status v-if="!evaluation.resultString" status-name="<?= i::__('Pendente') ?>"></mc-status>
                             </span>
                             <mc-link route="registration/evaluation/" :params="{id:evaluation.registrationId,user:userEvaluatorId}" icon="arrowPoint-right" right-icon class="button button--primary-outline"><?= i::__('Acessar') ?></mc-link>
