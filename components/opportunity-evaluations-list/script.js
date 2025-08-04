@@ -240,6 +240,11 @@ app.component('opportunity-evaluations-list', {
                 default:
                     return '';
             }
-        }
+        },
+        formatDecimal(value) {
+            const num = parseFloat(value);
+            if (isNaN(num)) return value;
+            return num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }    
     },
 });
