@@ -1,6 +1,6 @@
 /**
  * /src/modules/Opportunities/components/registration-print/script.js
- * Fixed to prevent double modal and handle print properly
+ * Simplified version to prevent content cropping while avoiding blank pages
  */
 
 app.component('registration-print', {
@@ -18,7 +18,7 @@ app.component('registration-print', {
     data() {
         return {
             loading: false,
-            isPrinting: false, // Prevent double triggers
+            isPrinting: false,
         }
     },
 
@@ -43,7 +43,6 @@ app.component('registration-print', {
 
             // Create new load handler
             this.handleIframeLoad = function () {
-                // Only process once
                 iframe.removeEventListener("load", self.handleIframeLoad);
 
                 setTimeout(() => {
@@ -51,11 +50,11 @@ app.component('registration-print', {
                         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
                         if (iframeDoc) {
-                            // Inject print fixes
+                            // Inject MINIMAL print fixes - no content removal
                             const style = iframeDoc.createElement('style');
                             style.textContent = `
                                 @media all {
-                                    /* Hide scrollbars */
+                                    /* Basic overflow fixes */
                                     * {
                                         -ms-overflow-style: none !important;
                                         scrollbar-width: none !important;
@@ -64,73 +63,50 @@ app.component('registration-print', {
                                         display: none !important;
                                     }
                                     
-                                    /* Let content flow naturally */
                                     html, body {
-                                        overflow: hidden !important;
-                                        height: auto !important;
+                                        overflow-x: hidden !important;
                                         width: 100% !important;
                                     }
                                     
-                                    /* Fix iframes */
                                     iframe {
-                                        overflow: hidden !important;
                                         border: none !important;
-                                    }
-                                    
-                                    /* Fix v1-embed-tool */
-                                    v1-embed-tool {
                                         overflow: hidden !important;
-                                        display: block !important;
-                                        height: auto !important;
                                     }
                                 }
                                 
                                 @media print {
-                                    /* Prevent blank pages at end */
-                                    body > *:last-child,
-                                    main > *:last-child,
-                                    .section:last-child {
-                                        page-break-after: avoid !important;
+                                    /* ONLY target the document end to prevent blank pages */
+                                    .print-registration > .section:last-of-type {
                                         margin-bottom: 0 !important;
-                                        padding-bottom: 0 !important;
+                                        page-break-after: avoid !important;
                                     }
                                     
-                                    /* Remove empty elements */
-                                    *:empty:not(br):not(hr):not(img):not(input):not(iframe) {
-                                        display: none !important;
+                                    /* Ensure proper page setup */
+                                    @page {
+                                        size: A4;
+                                        margin: 20mm;
+                                    }
+                                    
+                                    /* Basic print optimizations */
+                                    * {
+                                        background: transparent !important;
+                                        box-shadow: none !important;
                                     }
                                 }
                             `;
-                            // Remove the last section if it's nearly empty
-                            setTimeout(() => {
-                                const lastSection = iframeDoc.querySelector('.section:last-child');
-                                if (lastSection && lastSection.textContent.trim().length < 50) {
-                                    lastSection.style.display = 'none';
-                                }
-                            }, 800);
+
                             if (iframeDoc.head) {
                                 iframeDoc.head.appendChild(style);
                             }
 
-                            // Fix overflow on all elements
-                            const allElements = iframeDoc.querySelectorAll('*');
-                            allElements.forEach(el => {
-                                if (el.style && (el.style.overflow === 'auto' || el.style.overflow === 'scroll')) {
-                                    el.style.overflow = 'hidden';
-                                }
-                            });
+                            // Basic iframe fixes only
+                            self.basicIframeFixes(iframeDoc);
 
-                            // Remove empty trailing elements
-                            self.removeTrailingEmptyElements(iframeDoc);
-
-                            // Wait a bit more for rendering
+                            // Minimal cleanup after content loads
                             setTimeout(() => {
                                 self.loading = false;
-
-                                // Don't auto-print here to prevent double modal
-                                // The browser will handle the print when iframe loads
-
-                                // Reset printing flag after a delay
+                                
+                                // Reset printing flag
                                 setTimeout(() => {
                                     self.isPrinting = false;
                                 }, 2000);
@@ -141,50 +117,43 @@ app.component('registration-print', {
                         self.loading = false;
                         self.isPrinting = false;
                     }
-                }, 500);
+                }, 300);
             };
 
             // Add listener and set source
             iframe.addEventListener("load", this.handleIframeLoad);
-
-            // Set the iframe source - this will trigger the browser's print dialog
             iframe.src = Utils.createUrl('registration', 'registrationPrint', [this.registration.id]);
         },
 
-        removeTrailingEmptyElements(doc) {
-            // Start from the last child of body and work backwards
-            let lastChild = doc.body.lastElementChild;
+        basicIframeFixes(doc) {
+            try {
+                // Only basic fixes - no content removal
+                const iframes = doc.querySelectorAll('iframe');
+                iframes.forEach(iframe => {
+                    iframe.setAttribute('scrolling', 'no');
+                    iframe.style.border = 'none';
+                    iframe.style.overflow = 'hidden';
+                });
 
-            while (lastChild) {
-                // Check if element is effectively empty
-                const text = lastChild.textContent.trim();
-                const hasContent = lastChild.querySelector('img, iframe, video, audio, canvas, input, select, textarea');
+                // Ensure v1-embed-tool displays properly
+                const embedTools = doc.querySelectorAll('v1-embed-tool');
+                embedTools.forEach(tool => {
+                    tool.style.display = 'block';
+                });
 
-                if (!text && !hasContent) {
-                    const previous = lastChild.previousElementSibling;
-                    lastChild.remove();
-                    lastChild = previous;
-                } else {
-                    // Stop when we find content
-                    break;
-                }
+            } catch (e) {
+                console.warn('Error in basicIframeFixes:', e);
             }
-
-            // Also check sections
-            const sections = doc.querySelectorAll('.section');
-            sections.forEach(section => {
-                if (!section.textContent.trim() && !section.querySelector('img, iframe, video')) {
-                    section.style.display = 'none';
-                }
-            });
         }
     },
 
     mounted() {
-        // Set iframe attributes on mount
+        // Basic iframe setup
         if (this.$refs.printIframe) {
-            this.$refs.printIframe.setAttribute('scrolling', 'no');
-            this.$refs.printIframe.style.overflow = 'hidden';
+            const iframe = this.$refs.printIframe;
+            iframe.setAttribute('scrolling', 'no');
+            iframe.style.border = 'none';
+            iframe.style.overflow = 'hidden';
         }
     },
 
