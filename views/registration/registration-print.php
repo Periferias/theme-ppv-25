@@ -1,8 +1,6 @@
-<?php
-/**
- * src/modules/Opportunities/views/registration/registration-print.php
- * Optimized template based on actual PDF output analysis
- */
+<?php 
+// Desativar qualquer saída adicional
+while (ob_get_level()) ob_end_clean();
 
 use MapasCulturais\i;
 
@@ -11,537 +9,513 @@ $this->import('
     mc-summary-agent-info
     mc-summary-project
     mc-summary-spaces
-    registration-info
     v1-embed-tool
     opportunity-phases-timeline
-    mc-card
 ');
 
 $entity = $entity->firstPhase;
-
-$this->enqueueScript('app-v2', 'registration-print', 'js/registration-print.js');
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-/* Reset and base styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    font-size: 11pt;
-    line-height: 1.4;
-    color: #333;
-    background: white;
-}
-
-/* Compact layout */
-.print-registration {
-    max-width: 100%;
-    padding: 15px;
-}
-
-/* Typography - compact spacing */
-h1 { 
-    font-size: 18pt; 
-    font-weight: bold; 
-    margin: 12px 0 8px 0;
-    page-break-after: avoid;
-}
-
-h2 { 
-    font-size: 16pt; 
-    font-weight: bold; 
-    margin: 10px 0 6px 0;
-    page-break-after: avoid;
-}
-
-h3 { 
-    font-size: 14pt; 
-    font-weight: bold; 
-    margin: 8px 0 5px 0;
-    page-break-after: avoid;
-}
-
-h4 { 
-    font-size: 12pt; 
-    font-weight: bold; 
-    margin: 6px 0 4px 0;
-    page-break-after: avoid;
-}
-
-p {
-    margin: 0 0 6px 0;
-    orphans: 2;
-    widows: 2;
-}
-
-/* Compact sections */
-.section {
-    margin-bottom: 12px;
-}
-
-.section:last-child {
-    margin-bottom: 0;
-}
-
-/* Improved cards */
-.card {
-    padding: 10px;
-    margin-bottom: 8px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    page-break-inside: avoid;
-}
-
-.card:last-child {
-    margin-bottom: 0;
-}
-
-/* Compact columns */
-.col-12 {
-    width: 100%;
-    margin-bottom: 8px;
-}
-
-.col-12:last-child {
-    margin-bottom: 0;
-}
-
-/* Header info styling */
-.registration-header {
-    background: #f8f9fa;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #dee2e6;
-    border-radius: 4px;
-}
-
-.registration-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    font-size: 10pt;
-    margin-bottom: 8px;
-}
-
-.registration-meta > div {
-    flex: 1;
-    min-width: 120px;
-}
-
-.registration-meta strong {
-    display: block;
-    color: #495057;
-    margin-bottom: 2px;
-}
-
-/* Form data styling */
-.form-section {
-    margin-bottom: 15px;
-}
-
-.form-field {
-    margin-bottom: 8px;
-    padding: 4px 0;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.form-field:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-
-.field-label {
-    font-weight: bold;
-    color: #495057;
-    margin-bottom: 2px;
-    font-size: 10pt;
-}
-
-.field-value {
-    margin-left: 10px;
-    font-size: 11pt;
-}
-
-/* Embed tool styling */
-v1-embed-tool {
-    display: block;
-    width: 100%;
-    margin: 8px 0;
-    background: #fff;
-}
-
-/* Print-specific optimizations */
-@media print {
-    @page {
-        size: A4;
-        margin: 18mm 15mm 15mm 15mm;
-    }
-    
-    body {
-        font-size: 10pt;
-        line-height: 1.3;
-        margin: 0;
-        padding: 0;
-    }
-    
-    .print-registration {
-        padding: 0;
-        width: 100%;
-    }
-    
-    /* Hide non-printable elements */
-    .no-print,
-    button,
-    .registration-print__button,
-    nav,
-    header,
-    footer,
-    .print-button {
-        display: none !important;
-    }
-    
-    /* Compact print spacing */
-    .section {
-        margin-bottom: 10px;
-    }
-    
-    .section:last-child {
-        margin-bottom: 0 !important;
-    }
-    
-    .card {
-        padding: 8px;
-        margin-bottom: 6px;
-        border: 1px solid #999;
-        border-radius: 0;
-        page-break-inside: avoid;
-    }
-    
-    .card:last-child {
-        margin-bottom: 0;
-    }
-    
-    /* Typography adjustments */
-    h1 { 
-        font-size: 16pt; 
-        margin: 8px 0 6px 0;
-    }
-    
-    h2 { 
-        font-size: 14pt; 
-        margin: 6px 0 4px 0;
-    }
-    
-    h3 { 
-        font-size: 12pt; 
-        margin: 5px 0 3px 0;
-    }
-    
-    h4 { 
-        font-size: 11pt; 
-        margin: 4px 0 2px 0;
-    }
-    
-    p {
-        margin: 0 0 4px 0;
-    }
-    
-    /* Header styling for print */
-    .registration-header {
-        background: #f5f5f5 !important;
-        padding: 8px;
-        margin-bottom: 10px;
-        border: 1px solid #999;
-        page-break-inside: avoid;
-    }
-    
-    .registration-meta {
-        font-size: 9pt;
-        gap: 10px;
-        margin-bottom: 6px;
-    }
-    
-    /* Form fields for print */
-    .form-field {
-        margin-bottom: 4px;
-        padding: 2px 0;
-        border-bottom: 1px solid #ddd;
-        page-break-inside: avoid;
-    }
-    
-    .field-label {
-        font-size: 9pt;
-        margin-bottom: 1px;
-    }
-    
-    .field-value {
-        font-size: 10pt;
-        margin-left: 8px;
-    }
-    
-    /* Column adjustments */
-    .col-12 {
-        margin-bottom: 4px;
-    }
-    
-    .col-12:last-child {
-        margin-bottom: 0;
-    }
-    
-    /* Embed tools */
-    v1-embed-tool {
-        margin: 6px 0;
-        page-break-inside: auto;
-    }
-    
-    /* Timeline compact */
-    opportunity-phases-timeline {
-        margin: 6px 0;
-    }
-    
-    /* Remove backgrounds and shadows */
-    * {
-        background: transparent !important;
-        box-shadow: none !important;
-        text-shadow: none !important;
-    }
-    
-    /* Specific background exceptions */
-    .registration-header {
-        background: #f5f5f5 !important;
-    }
-    
-    /* Prevent orphaned content */
-    .form-section {
-        page-break-inside: avoid;
-        margin-bottom: 8px;
-    }
-    
-    /* Last section cleanup */
-    .print-registration > *:last-child {
-        margin-bottom: 0 !important;
-        page-break-after: avoid !important;
-    }
-}
-
-/* Utility classes */
-.bold { font-weight: bold; }
-.text-center { text-align: center; }
-.text-small { font-size: 9pt; }
-.mb-0 { margin-bottom: 0 !important; }
-.mt-0 { margin-top: 0 !important; }
-
-/* Clean up empty states */
-.form-field:empty,
-.field-value:empty {
-    display: none;
-}
-
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-    .registration-meta {
-        flex-direction: column;
-        gap: 8px;
-    }
-}
-</style>
-</head>
-<body>
-
 <main class="print-registration">
-    <!-- Enhanced Header Section -->
+    <!-- Cabeçalho -->
     <section class="section">
         <div class="registration-header">
             <h1 class="text-center mb-0"><?= i::__('Comprovante de Inscrição') ?></h1>
-            
             <div class="registration-meta">
-                <div>
-                    <strong><?= i::__('Inscrição') ?></strong>
-                    {{entity.number}}
-                </div>
-                <div>
-                    <strong><?= i::__('Data') ?></strong>
-                    {{entity.sentTimestamp.date('2-digit year')}}
-                </div>
-                <div>
-                    <strong><?= i::__('Categoria') ?></strong>
-                    {{entity.category}}
-                </div>
-                <div>
-                    <strong><?= i::__('Status') ?></strong>
-                    {{entity.status}}
-                </div>
+                <div><strong><?= i::__('Inscrição') ?></strong> {{registration.number}}</div>
+                <div><strong><?= i::__('Data') ?></strong> {{registration.sentTimestamp.date('2-digit year')}}</div>
+                <div><strong><?= i::__('Categoria') ?></strong> {{registration.category}}</div>
+                <div><strong><?= i::__('Status') ?></strong> {{registration.status}}</div>
             </div>
-            
-            <?php if($entity->sentTimestamp): ?>
-            <div class="text-center text-small">
-                <?= i::__('Inscrição realizada em') ?> {{entity.sentTimestamp.date('2-digit year')}} <?= i::__('às') ?> {{entity.sentTimestamp.time('long')}}
-            </div>
+            <?php if ($entity->sentTimestamp): ?>
+                <div class="text-center text-small">
+                    <?= i::__('Inscrição realizada em') ?> {{registration.sentTimestamp.date('2-digit year')}} <?= i::__('às') ?> {{registration.sentTimestamp.time('long')}}
+                </div>
             <?php endif; ?>
         </div>
-        
+
         <div class="col-12">
-            <opportunity-phases-timeline :entity-status="entity.status" center big></opportunity-phases-timeline>
+            <opportunity-phases-timeline :entity-status="registration.status" center big></opportunity-phases-timeline>
         </div>
     </section>
-    
-    <!-- Agent Information -->
+
+    <!-- Dados do Proponente -->
     <section class="section">
         <div class="card">
             <h2><?= i::__('Dados do Proponente') ?></h2>
-            <mc-summary-agent :entity="entity"></mc-summary-agent>
-            <mc-summary-agent-info :entity="entity"></mc-summary-agent-info>
+            <mc-summary-agent :entity="registration"></mc-summary-agent>
+            <mc-summary-agent-info :entity="registration"></mc-summary-agent-info>
         </div>
     </section>
-    
-    <!-- Form Data Section -->
+
+    <!-- Dados do formulário -->
     <section class="section">
         <div class="card">
             <h2><?= i::__('Dados Informados no Formulário') ?></h2>
-            <div class="form-section">
-                <mc-summary-spaces :entity="entity"></mc-summary-spaces>
-            </div>
-            <div class="form-section">
-                <mc-summary-project :entity="entity"></mc-summary-project>
-            </div>
+            <mc-summary-spaces :entity="registration"></mc-summary-spaces>
+            <mc-summary-project :entity="registration"></mc-summary-project>
         </div>
     </section>
 
-    <?php 
-    // Check for data collection phases
-    $hasDataCollectionPhases = false;
-    $tempEntity = $entity;
-    while($tempEntity) {
-        if($tempEntity->opportunity->isDataCollection) {
-            $hasDataCollectionPhases = true;
-            break;
-        }
-        $tempEntity = $tempEntity->nextPhase;
-    }
-    ?>
-    
-    <!-- Registration Forms -->
-    <?php if($hasDataCollectionPhases): ?>
-        <?php 
-        $currentEntity = $entity;
-        while($currentEntity): 
-            $opportunity = $currentEntity->opportunity;
-            if($opportunity->isDataCollection):
-        ?>
-        <section class="section">
-            <div class="card">
-                <h2>
-                    <?php if($opportunity->isFirstPhase): ?>
-                        <?= i::__('Formulário de Inscrição') ?>
-                    <?php else: ?>
-                        <?= $opportunity->name ?>
-                    <?php endif; ?>
-                </h2>
+    <!-- Fases -->
+    <section class="section" v-for="(phase, index) in registration.phases" :key="phase.id">
+        <div class="card">
+            <h2>{{ phase.name }}</h2>
+            <v1-embed-tool route="registrationview" :id="phase.id"></v1-embed-tool>
+        </div>
+    </section>
 
-                <v1-embed-tool 
-                    route="registrationview" 
-                    :id="<?=$currentEntity->id?>">
-                </v1-embed-tool>
-            </div>
-        </section>
-        <?php 
-            endif;
-            $currentEntity = $currentEntity->nextPhase;
-        endwhile; 
-        ?>
-    <?php endif; ?>
+    <!-- Marcador para evitar páginas em branco -->
+    <div class="end-of-document-marker"></div>
 </main>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // Enhanced iframe setup
-    function setupPrintableIframes() {
-        document.querySelectorAll('iframe').forEach(function(iframe) {
-            iframe.setAttribute('scrolling', 'no');
-            iframe.style.border = 'none';
-            iframe.style.overflow = 'hidden';
-            iframe.style.width = '100%';
-            iframe.style.display = 'block';
-        });
+<style>
+    /* Estilos normais da página - SEM ALTERAÇÕES */
+    .print-registration {
+        position: relative;
+        overflow: visible !important;
+        width: 100%;
+        background: white;
     }
-    
-    // Clean up empty form fields
-    function cleanupEmptyFields() {
-        document.querySelectorAll('.field-value').forEach(function(field) {
-            if (!field.textContent.trim()) {
-                const parent = field.closest('.form-field');
-                if (parent) {
-                    parent.style.display = 'none';
-                }
-            }
-        });
+
+    .section {
+        margin-bottom: 20px;
+        page-break-inside: avoid;
     }
-    
-    // Optimize for print
-    function optimizeForPrint() {
-        // Remove empty sections
-        document.querySelectorAll('.section').forEach(function(section) {
-            const hasVisibleContent = section.textContent.trim() || 
-                                     section.querySelector('iframe, img, video, canvas, svg') ||
-                                     section.querySelector('v1-embed-tool, mc-summary-agent, mc-summary-project');
-            
-            if (!hasVisibleContent) {
-                section.style.display = 'none';
-            }
-        });
+
+    .card {
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+    }
+
+    .registration-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .registration-meta {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+        flex-wrap: wrap;
+    }
+
+    .registration-meta > div {
+        margin: 5px;
+    }
+
+    .end-of-document-marker {
+        position: absolute;
+        bottom: 0;
+        height: 1px;
+        width: 1px;
+        z-index: -1000;
+    }
+
+    /* APENAS estilos de impressão - não afeta visualização normal */
+    @media print {
+        /* Configuração da página */
+        @page {
+            size: A4;
+            margin: 15mm 15mm 10mm 15mm;
+        }
         
-        // Ensure last section has no bottom margin
-        const lastSection = document.querySelector('.section:last-child');
-        if (lastSection) {
-            lastSection.style.marginBottom = '0';
+        /* Forçar remoção COMPLETA de barras de rolagem */
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+        
+        *::-webkit-scrollbar {
+            display: none !important;
+            width: 0px !important;
+            height: 0px !important;
+            background: transparent !important;
+        }
+        
+        *::-webkit-scrollbar-track {
+            display: none !important;
+        }
+        
+        *::-webkit-scrollbar-thumb {
+            display: none !important;
+        }
+        
+        html, body {
+            height: auto !important;
+            overflow: hidden !important;
+            background: white !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-size: 12pt !important;
+            line-height: 1.4 !important;
+            -ms-overflow-style: none !important;
+            scrollbar-width: none !important;
+            scrollbar-gutter: stable !important;
+        }
+        
+        /* Ocultar TODOS os elementos exceto o conteúdo principal */
+        body > * {
+            display: none !important;
+            visibility: hidden !important;
+        }
+        
+        body > main.print-registration {
+            display: block !important;
+            visibility: visible !important;
+        }
+        
+        /* Ocultar headers com máxima especificidade */
+        html body header,
+        html body .header,
+        html body [role="banner"],
+        html body .site-header,
+        html body .page-header,
+        html body .main-header,
+        html body .top-header,
+        html body #header,
+        html body .masthead,
+        html body nav,
+        html body .nav,
+        html body .navbar,
+        html body .navigation,
+        html body .menu,
+        html body .toolbar,
+        html body .actionbar,
+        html body footer,
+        html body .footer,
+        html body .no-print,
+        html body .hide-print,
+        html body [data-print="false"],
+        html body .breadcrumb,
+        html body .pagination,
+        html body .sidebar,
+        html body .aside,
+        html body [class*="header"],
+        html body [id*="header"],
+        html body [class*="nav"],
+        html body [id*="nav"] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            position: absolute !important;
+            left: -9999px !important;
+            top: -9999px !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+        
+        /* Garantir que apenas o conteúdo principal apareça */
+        .print-registration {
+            position: static !important;
+            width: 100% !important;
+            height: auto !important;
+            overflow: visible !important;
+            background: white !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            left: auto !important;
+            top: auto !important;
+            z-index: 9999 !important;
+        }
+        
+        /* Quebras de página otimizadas */
+        .section {
+            page-break-inside: avoid !important;
+            margin-bottom: 20px !important;
+        }
+        
+        .card {
+            page-break-inside: avoid !important;
+            margin-bottom: 15px !important;
+            border: 1px solid #ccc !important;
+        }
+        
+        h1, h2, h3 {
+            page-break-after: avoid !important;
+            margin-bottom: 10px !important;
+            color: black !important;
+        }
+        
+        /* Evitar páginas em branco */
+        .section:last-child {
+            page-break-after: avoid !important;
+        }
+        
+        .end-of-document-marker {
+            display: none !important;
+        }
+        
+        /* Garantir que iframes sejam visíveis */
+        .print-registration iframe {
+            display: block !important;
+            overflow: visible !important;
+            height: auto !important;
+            min-height: 200px !important;
+            width: 100% !important;
+            border: 1px solid #ddd !important;
+            page-break-inside: avoid !important;
+        }
+        
+        /* Ocultar elementos após body para remover resíduos */
+        body:after {
+            content: none !important;
+            display: none !important;
         }
     }
+    /* Estilos de impressão aprimorados para remoção completa de barras de rolagem */
+@media print {
+    /* Configuração da página */
+    @page {
+        size: A4;
+        margin: 15mm 15mm 10mm 15mm;
+    }
     
-    // Initial setup
-    setTimeout(function() {
-        setupPrintableIframes();
-        cleanupEmptyFields();
-    }, 1000);
+    /* REMOÇÃO RADICAL DE BARRAS DE ROLAGEM - Múltiplas abordagens */
     
-    // Before print optimizations
-    window.addEventListener('beforeprint', function() {
-        optimizeForPrint();
-        setupPrintableIframes();
-    });
+    /* Abordagem 1: Seletores universais */
+    *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+        scrollbar-gutter: stable !important;
+        overflow-x: visible !important;
+        overflow-y: visible !important;
+    }
     
-    // Vue component handling
-    setTimeout(function() {
-        setupPrintableIframes();
-        
-        // Ensure embed tools display properly
-        document.querySelectorAll('v1-embed-tool').forEach(function(tool) {
-            tool.style.display = 'block';
-            tool.style.width = '100%';
-        });
-        
-        cleanupEmptyFields();
-    }, 2500);
+    /* Abordagem 2: WebKit scrollbars - Máxima especificidade */
+    html *::-webkit-scrollbar,
+    body *::-webkit-scrollbar,
+    div *::-webkit-scrollbar,
+    iframe *::-webkit-scrollbar,
+    *::-webkit-scrollbar {
+        display: none !important;
+        width: 0px !important;
+        height: 0px !important;
+        background: transparent !important;
+        -webkit-appearance: none !important;
+    }
     
-    // Final cleanup after all content loads
-    window.addEventListener('load', function() {
-        setTimeout(function() {
-            optimizeForPrint();
-            setupPrintableIframes();
-        }, 1000);
-    });
-});
-</script>
+    html *::-webkit-scrollbar-track,
+    body *::-webkit-scrollbar-track,
+    div *::-webkit-scrollbar-track,
+    iframe *::-webkit-scrollbar-track,
+    *::-webkit-scrollbar-track {
+        display: none !important;
+        background: transparent !important;
+        -webkit-appearance: none !important;
+    }
+    
+    html *::-webkit-scrollbar-thumb,
+    body *::-webkit-scrollbar-thumb,
+    div *::-webkit-scrollbar-thumb,
+    iframe *::-webkit-scrollbar-thumb,
+    *::-webkit-scrollbar-thumb {
+        display: none !important;
+        background: transparent !important;
+        -webkit-appearance: none !important;
+    }
+    
+    html *::-webkit-scrollbar-corner,
+    body *::-webkit-scrollbar-corner,
+    div *::-webkit-scrollbar-corner,
+    iframe *::-webkit-scrollbar-corner,
+    *::-webkit-scrollbar-corner {
+        display: none !important;
+        background: transparent !important;
+    }
+    
+    /* Abordagem 3: Elementos específicos do HTML */
+    html, body {
+        height: auto !important;
+        width: 100% !important;
+        overflow: visible !important;
+        overflow-x: visible !important;
+        overflow-y: visible !important;
+        background: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 12pt !important;
+        line-height: 1.4 !important;
+        -ms-overflow-style: none !important;
+        scrollbar-width: none !important;
+        scrollbar-gutter: stable !important;
+    }
+    
+    /* Abordagem 4: Containers e elementos de conteúdo */
+    .print-registration,
+    .print-registration-container,
+    .section,
+    .card,
+    div, section, article, main {
+        overflow: visible !important;
+        overflow-x: visible !important;
+        overflow-y: visible !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+    
+    /* Abordagem 5: iframes e elementos embed */
+    iframe, embed, object, video {
+        overflow: visible !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+    
+    iframe::-webkit-scrollbar,
+    embed::-webkit-scrollbar,
+    object::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+    
+    /* Abordagem 6: Elementos que podem conter scrollbars */
+    .v1-embed-tool,
+    [class*="embed"],
+    [id*="embed"],
+    .content,
+    .wrapper,
+    .container {
+        overflow: visible !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+    
+    /* Ocultar TODOS os elementos exceto o conteúdo principal */
+    body > *:not(.print-registration):not(.print-registration-container) {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    
+    body > .print-registration,
+    body > .print-registration-container {
+        display: block !important;
+        visibility: visible !important;
+    }
+    
+    /* Ocultar headers e elementos de navegação */
+    html body header,
+    html body .header,
+    html body [role="banner"],
+    html body .site-header,
+    html body .page-header,
+    html body .main-header,
+    html body .top-header,
+    html body #header,
+    html body .masthead,
+    html body nav,
+    html body .nav,
+    html body .navbar,
+    html body .navigation,
+    html body .menu,
+    html body .toolbar,
+    html body .actionbar,
+    html body footer,
+    html body .footer,
+    html body .no-print,
+    html body .hide-print,
+    html body [data-print="false"],
+    html body .breadcrumb,
+    html body .pagination,
+    html body .sidebar,
+    html body .aside,
+    html body [class*="header"],
+    html body [id*="header"],
+    html body [class*="nav"],
+    html body [id*="nav"],
+    html body .registration-print__button {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+    
+    /* Garantir que apenas o conteúdo principal apareça */
+    .print-registration,
+    .print-registration-container {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        overflow: visible !important;
+        background: white !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        left: auto !important;
+        top: auto !important;
+        z-index: 9999 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+    }
+    
+    /* Quebras de página otimizadas */
+    .section {
+        page-break-inside: avoid !important;
+        margin-bottom: 20px !important;
+        overflow: visible !important;
+    }
+    
+    .card {
+        page-break-inside: avoid !important;
+        margin-bottom: 15px !important;
+        border: 1px solid #ccc !important;
+        overflow: visible !important;
+    }
+    
+    h1, h2, h3 {
+        page-break-after: avoid !important;
+        margin-bottom: 10px !important;
+        color: black !important;
+    }
+    
+    /* Evitar páginas em branco */
+    .section:last-child {
+        page-break-after: avoid !important;
+    }
+    
+    .end-of-document-marker {
+        display: none !important;
+    }
+    
+    /* Garantir que iframes sejam visíveis e sem scroll */
+    .print-registration iframe,
+    .print-registration-container iframe {
+        display: block !important;
+        overflow: visible !important;
+        height: auto !important;
+        min-height: 200px !important;
+        width: 100% !important;
+        border: 1px solid #ddd !important;
+        page-break-inside: avoid !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+    
+    /* Remover qualquer estilo após o body */
+    body::after,
+    body::before {
+        content: none !important;
+        display: none !important;
+    }
+    
+    /* Força adicional para elementos problemáticos */
+    [style*="overflow"],
+    [style*="scroll"] {
+        overflow: visible !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+}
+</style>
 
-</body>
-</html>
+<?php exit;
