@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Desativar qualquer saída adicional
 while (ob_get_level()) ob_end_clean();
 
@@ -64,384 +64,79 @@ $entity = $entity->firstPhase;
             <v1-embed-tool route="registrationview" :id="phase.id"></v1-embed-tool>
         </div>
     </section>
-
-    <!-- Marcador para evitar páginas em branco -->
-    <div class="end-of-document-marker"></div>
 </main>
 
 <style>
-    /* Estilos normais da página - SEM ALTERAÇÕES */
-    .print-registration {
-        position: relative;
-        overflow: visible !important;
-        width: 100%;
-        background: white;
-    }
+/* Estilos normais da página */
+.print-registration {
+    position: relative;
+    overflow: visible !important;
+    width: 100%;
+    background: white;
+}
 
-    .section {
-        margin-bottom: 20px;
-        page-break-inside: avoid;
-    }
+.section {
+    margin-bottom: 15px;
+    page-break-inside: avoid;
+}
 
-    .card {
-        margin-bottom: 15px;
-        padding: 15px;
-        border: 1px solid #ddd;
-        page-break-inside: avoid;
-    }
+.card {
+    margin-bottom: 12px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    page-break-inside: avoid;
+    border-radius: 4px;
+}
 
-    .registration-header {
-        text-align: center;
-        margin-bottom: 30px;
-    }
+.registration-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
 
-    .registration-meta {
-        display: flex;
-        justify-content: space-around;
-        margin: 20px 0;
-        flex-wrap: wrap;
-    }
+.registration-meta {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 15px 0;
+}
 
-    .registration-meta > div {
-        margin: 5px;
-    }
+.registration-meta > div {
+    min-width: 120px;
+    text-align: center;
+}
 
-    .end-of-document-marker {
-        position: absolute;
-        bottom: 0;
-        height: 1px;
-        width: 1px;
-        z-index: -1000;
-    }
-
-    /* APENAS estilos de impressão - não afeta visualização normal */
-    @media print {
-        /* Configuração da página */
-        @page {
-            size: A4;
-            margin: 15mm 15mm 10mm 15mm;
-        }
-        
-        /* Forçar remoção COMPLETA de barras de rolagem */
-        * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-        }
-        
-        *::-webkit-scrollbar {
-            display: none !important;
-            width: 0px !important;
-            height: 0px !important;
-            background: transparent !important;
-        }
-        
-        *::-webkit-scrollbar-track {
-            display: none !important;
-        }
-        
-        *::-webkit-scrollbar-thumb {
-            display: none !important;
-        }
-        
-        html, body {
-            height: auto !important;
-            overflow: hidden !important;
-            background: white !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            font-size: 12pt !important;
-            line-height: 1.4 !important;
-            -ms-overflow-style: none !important;
-            scrollbar-width: none !important;
-            scrollbar-gutter: stable !important;
-        }
-        
-        /* Ocultar TODOS os elementos exceto o conteúdo principal */
-        body > * {
-            display: none !important;
-            visibility: hidden !important;
-        }
-        
-        body > main.print-registration {
-            display: block !important;
-            visibility: visible !important;
-        }
-        
-        /* Ocultar headers com máxima especificidade */
-        html body header,
-        html body .header,
-        html body [role="banner"],
-        html body .site-header,
-        html body .page-header,
-        html body .main-header,
-        html body .top-header,
-        html body #header,
-        html body .masthead,
-        html body nav,
-        html body .nav,
-        html body .navbar,
-        html body .navigation,
-        html body .menu,
-        html body .toolbar,
-        html body .actionbar,
-        html body footer,
-        html body .footer,
-        html body .no-print,
-        html body .hide-print,
-        html body [data-print="false"],
-        html body .breadcrumb,
-        html body .pagination,
-        html body .sidebar,
-        html body .aside,
-        html body [class*="header"],
-        html body [id*="header"],
-        html body [class*="nav"],
-        html body [id*="nav"] {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            position: absolute !important;
-            left: -9999px !important;
-            top: -9999px !important;
-            width: 0 !important;
-            height: 0 !important;
-        }
-        
-        /* Garantir que apenas o conteúdo principal apareça */
-        .print-registration {
-            position: static !important;
-            width: 100% !important;
-            height: auto !important;
-            overflow: visible !important;
-            background: white !important;
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            left: auto !important;
-            top: auto !important;
-            z-index: 9999 !important;
-        }
-        
-        /* Quebras de página otimizadas */
-        .section {
-            page-break-inside: avoid !important;
-            margin-bottom: 20px !important;
-        }
-        
-        .card {
-            page-break-inside: avoid !important;
-            margin-bottom: 15px !important;
-            border: 1px solid #ccc !important;
-        }
-        
-        h1, h2, h3 {
-            page-break-after: avoid !important;
-            margin-bottom: 10px !important;
-            color: black !important;
-        }
-        
-        /* Evitar páginas em branco */
-        .section:last-child {
-            page-break-after: avoid !important;
-        }
-        
-        .end-of-document-marker {
-            display: none !important;
-        }
-        
-        /* Garantir que iframes sejam visíveis */
-        .print-registration iframe {
-            display: block !important;
-            overflow: visible !important;
-            height: auto !important;
-            min-height: 200px !important;
-            width: 100% !important;
-            border: 1px solid #ddd !important;
-            page-break-inside: avoid !important;
-        }
-        
-        /* Ocultar elementos após body para remover resíduos */
-        body:after {
-            content: none !important;
-            display: none !important;
-        }
-    }
-    /* Estilos de impressão aprimorados para remoção completa de barras de rolagem */
+/* ESTILOS DE IMPRESSÃO OTIMIZADOS - VERSÃO CORRIGIDA */
 @media print {
-    /* Configuração da página */
+    /* Configuração da página com margens otimizadas */
     @page {
         size: A4;
-        margin: 15mm 15mm 10mm 15mm;
+        margin: 10mm 8mm 5mm 8mm; /* Margens reduzidas */
+        padding: 0;
+        orphans: 3; /* Mínimo de linhas no final da página */
+        widows: 3;  /* Mínimo de linhas no topo da página */
     }
-    
-    /* REMOÇÃO RADICAL DE BARRAS DE ROLAGEM - Múltiplas abordagens */
-    
-    /* Abordagem 1: Seletores universais */
-    *, *::before, *::after {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-        scrollbar-gutter: stable !important;
-        overflow-x: visible !important;
-        overflow-y: visible !important;
-    }
-    
-    /* Abordagem 2: WebKit scrollbars - Máxima especificidade */
-    html *::-webkit-scrollbar,
-    body *::-webkit-scrollbar,
-    div *::-webkit-scrollbar,
-    iframe *::-webkit-scrollbar,
-    *::-webkit-scrollbar {
-        display: none !important;
-        width: 0px !important;
-        height: 0px !important;
-        background: transparent !important;
-        -webkit-appearance: none !important;
-    }
-    
-    html *::-webkit-scrollbar-track,
-    body *::-webkit-scrollbar-track,
-    div *::-webkit-scrollbar-track,
-    iframe *::-webkit-scrollbar-track,
-    *::-webkit-scrollbar-track {
-        display: none !important;
-        background: transparent !important;
-        -webkit-appearance: none !important;
-    }
-    
-    html *::-webkit-scrollbar-thumb,
-    body *::-webkit-scrollbar-thumb,
-    div *::-webkit-scrollbar-thumb,
-    iframe *::-webkit-scrollbar-thumb,
-    *::-webkit-scrollbar-thumb {
-        display: none !important;
-        background: transparent !important;
-        -webkit-appearance: none !important;
-    }
-    
-    html *::-webkit-scrollbar-corner,
-    body *::-webkit-scrollbar-corner,
-    div *::-webkit-scrollbar-corner,
-    iframe *::-webkit-scrollbar-corner,
-    *::-webkit-scrollbar-corner {
-        display: none !important;
-        background: transparent !important;
-    }
-    
-    /* Abordagem 3: Elementos específicos do HTML */
-    html, body {
+
+    /* Reset geral para impressão */
+    body, html {
         height: auto !important;
         width: 100% !important;
         overflow: visible !important;
-        overflow-x: visible !important;
-        overflow-y: visible !important;
         background: white !important;
         margin: 0 !important;
         padding: 0 !important;
-        font-size: 12pt !important;
-        line-height: 1.4 !important;
-        -ms-overflow-style: none !important;
-        scrollbar-width: none !important;
-        scrollbar-gutter: stable !important;
+        font-family: Arial, sans-serif !important;
+        font-size: 9.5pt !important; /* Tamanho de fonte ligeiramente menor */
+        line-height: 1.25 !important; /* Line-height mais compacto */
+        color: #000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
-    
-    /* Abordagem 4: Containers e elementos de conteúdo */
-    .print-registration,
-    .print-registration-container,
-    .section,
-    .card,
-    div, section, article, main {
-        overflow: visible !important;
-        overflow-x: visible !important;
-        overflow-y: visible !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-    }
-    
-    /* Abordagem 5: iframes e elementos embed */
-    iframe, embed, object, video {
-        overflow: visible !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-    }
-    
-    iframe::-webkit-scrollbar,
-    embed::-webkit-scrollbar,
-    object::-webkit-scrollbar {
-        display: none !important;
-        width: 0 !important;
-        height: 0 !important;
-    }
-    
-    /* Abordagem 6: Elementos que podem conter scrollbars */
-    .v1-embed-tool,
-    [class*="embed"],
-    [id*="embed"],
-    .content,
-    .wrapper,
-    .container {
-        overflow: visible !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-    }
-    
-    /* Ocultar TODOS os elementos exceto o conteúdo principal */
-    body > *:not(.print-registration):not(.print-registration-container) {
-        display: none !important;
-        visibility: hidden !important;
-    }
-    
-    body > .print-registration,
-    body > .print-registration-container {
-        display: block !important;
-        visibility: visible !important;
-    }
-    
-    /* Ocultar headers e elementos de navegação */
-    html body header,
-    html body .header,
-    html body [role="banner"],
-    html body .site-header,
-    html body .page-header,
-    html body .main-header,
-    html body .top-header,
-    html body #header,
-    html body .masthead,
-    html body nav,
-    html body .nav,
-    html body .navbar,
-    html body .navigation,
-    html body .menu,
-    html body .toolbar,
-    html body .actionbar,
-    html body footer,
-    html body .footer,
-    html body .no-print,
-    html body .hide-print,
-    html body [data-print="false"],
-    html body .breadcrumb,
-    html body .pagination,
-    html body .sidebar,
-    html body .aside,
-    html body [class*="header"],
-    html body [id*="header"],
-    html body [class*="nav"],
-    html body [id*="nav"],
-    html body .registration-print__button {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-        position: absolute !important;
-        left: -9999px !important;
-        top: -9999px !important;
-        width: 0 !important;
-        height: 0 !important;
-    }
-    
-    /* Garantir que apenas o conteúdo principal apareça */
-    .print-registration,
-    .print-registration-container {
+
+    /* Container principal - crítico */
+    .print-registration {
         position: static !important;
         width: 100% !important;
         height: auto !important;
@@ -449,73 +144,227 @@ $entity = $entity->firstPhase;
         background: white !important;
         display: block !important;
         visibility: visible !important;
-        opacity: 1 !important;
-        left: auto !important;
-        top: auto !important;
-        z-index: 9999 !important;
         margin: 0 !important;
         padding: 0 !important;
         border: none !important;
+        box-shadow: none !important;
     }
-    
-    /* Quebras de página otimizadas */
+
+    /* Cabeçalho otimizado */
+    .registration-header {
+        text-align: center !important;
+        margin-bottom: 12px !important;
+        padding: 8px 0 !important;
+        border-bottom: 1px solid #ccc !important;
+        page-break-after: avoid !important;
+    }
+
+    .registration-header h1 {
+        font-size: 14pt !important;
+        font-weight: bold !important;
+        margin: 0 0 8px 0 !important;
+        color: #000 !important;
+    }
+
+    /* Meta dados compactos */
+    .registration-meta {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+        gap: 6px 10px !important;
+        margin: 8px 0 !important;
+        padding: 6px !important;
+        background-color: transparent !important;
+        border: 1px solid #ddd !important;
+        border-radius: 3px !important;
+        font-size: 8.5pt !important;
+        page-break-inside: avoid !important;
+    }
+
+    .registration-meta > div {
+        margin: 0 !important;
+        padding: 2px 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .registration-meta strong {
+        font-weight: bold !important;
+        color: #333 !important;
+        display: block;
+    }
+
+    /* Texto de data compacto */
+    .text-center.text-small {
+        font-size: 8pt !important;
+        color: #666 !important;
+        margin-top: 3px !important;
+        font-style: italic !important;
+    }
+
+    /* Seções com espaçamento reduzido */
     .section {
+        margin-bottom: 8px !important;
+        padding: 0 !important;
         page-break-inside: avoid !important;
-        margin-bottom: 20px !important;
         overflow: visible !important;
     }
-    
+
+    /* Cards compactos */
     .card {
-        page-break-inside: avoid !important;
-        margin-bottom: 15px !important;
+        margin-bottom: 8px !important;
+        padding: 8px !important;
         border: 1px solid #ccc !important;
+        border-radius: 3px !important;
+        background: white !important;
+        page-break-inside: avoid !important;
+        overflow: visible !important;
+        box-shadow: none !important;
+    }
+
+    /* Títulos das seções compactos */
+    .card h2, .section h2 {
+        font-size: 11pt !important;
+        font-weight: bold !important;
+        color: #000 !important;
+        margin: 0 0 6px 0 !important;
+        padding-bottom: 2px !important;
+        border-bottom: 1px solid #eee !important;
+        page-break-after: avoid !important;
+    }
+
+    /* Parágrafos e textos compactos */
+    p, li, td, span, div {
+        margin: 3px 0 !important;
+        padding: 0 !important;
+        font-size: 9pt !important;
+        line-height: 1.3 !important;
+        word-break: break-word !important; /* Permite quebrar palavras longas */
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+    }
+
+    /* Componentes específicos */
+    .mc-summary-agent,
+    .mc-summary-agent-info,
+    .mc-summary-spaces,
+    .mc-summary-project {
+        margin: 4px 0 !important;
+        padding: 4px !important;
+        border-left: none !important;
+        background-color: transparent !important;
+        font-size: 9pt !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* Iframes otimizados - CRÍTICO */
+    iframe {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 100px !important;
+        max-height: none !important;
+        border: 1px solid #ddd !important;
+        margin: 4px 0 !important;
+        page-break-inside: avoid !important;
         overflow: visible !important;
     }
-    
-    h1, h2, h3 {
-        page-break-after: avoid !important;
-        margin-bottom: 10px !important;
-        color: black !important;
-    }
-    
-    /* Evitar páginas em branco */
+
+    /* Garantir que a última seção seja visível */
     .section:last-child {
+        margin-bottom: 0 !important;
         page-break-after: avoid !important;
     }
-    
-    .end-of-document-marker {
+
+    /* Ocultar elementos desnecessários */
+    body > *:not(.print-registration) {
         display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .registration-print__button,
+    .no-print, .hide-print, [data-print="false"],
+    header, .header, [role="banner"],
+    nav, .nav, .navbar, .navigation,
+    footer, .footer, .breadcrumb, .pagination,
+    .sidebar, .aside {
+        display: none !important;
+        visibility: hidden !important;
+        position: absolute !important;
+        left: -9999px !important;
+        top: -9999px !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* Prevenir quebras ruins em textos */
+    p, li, div, span, td, th {
+        orphans: 3 !important;
+        widows: 3 !important;
+    }
+
+    /* Garantir que o conteúdo use toda a largura disponível */
+    div, section, article {
+        max-width: 100% !important;
+        min-width: auto !important;
+        width: 100% !important;
     }
     
-    /* Garantir que iframes sejam visíveis e sem scroll */
-    .print-registration iframe,
-    .print-registration-container iframe {
+    /* Correção para tabelas */
+    table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        margin: 4px 0 !important;
+        font-size: 9pt !important;
+        page-break-inside: auto !important;
+    }
+    
+    th, td {
+        padding: 3px 5px !important;
+        border: 1px solid #ddd !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        hyphens: auto !important;
+    }
+    
+    /* Timeline compacta */
+    .opportunity-phases-timeline {
+        margin: 6px 0 !important;
+        padding: 5px !important;
+        font-size: 8.5pt !important;
+    }
+    
+    /* Remover espaços em branco extras */
+    .empty-field, .field-value:empty {
+        display: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Forçar exibição de conteúdo cortado */
+    v1-embed-tool, [class*="embed"] {
         display: block !important;
         overflow: visible !important;
         height: auto !important;
-        min-height: 200px !important;
-        width: 100% !important;
-        border: 1px solid #ddd !important;
         page-break-inside: avoid !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
     }
     
-    /* Remover qualquer estilo após o body */
-    body::after,
-    body::before {
-        content: none !important;
-        display: none !important;
-    }
-    
-    /* Força adicional para elementos problemáticos */
-    [style*="overflow"],
-    [style*="scroll"] {
-        overflow: visible !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
+    /* Garantir que a última página não fique em branco */
+    .end-of-document-marker {
+        height: 1px;
+        width: 1px;
+        display: block;
+        margin: 0;
+        padding: 0;
+        visibility: hidden;
+        page-break-after: avoid !important;
     }
 }
 </style>
 
-<?php exit;
+<?php exit; ?>

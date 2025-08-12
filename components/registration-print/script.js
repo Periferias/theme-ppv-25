@@ -2,19 +2,18 @@ app.component('registration-print', {
   template: `
     <div>
       <style>
-        /* Estilo do botão conforme solicitado */
         .registration-print__button {
             align-items: center;
             background-color: transparent;
             border: none;
-            bottom: .25rem;
+            top: -410rem !important;
             color: var(--mc-low-500);
             cursor: pointer;
             display: flex;
             font-size: var(--mc-font-size-xxs);
             gap: .5rem;
             position: absolute;
-            right: 0;
+            right: 48px !important;
         }
         
         .button--primary {
