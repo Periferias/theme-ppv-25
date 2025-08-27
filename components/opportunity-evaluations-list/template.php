@@ -13,22 +13,22 @@ $this->import('
 ');
 ?>
 <div class="opportunity-evaluations-list" v-if="showList()">
-    <div :class="['opportunity-evaluations-list__container', 'isOpen']">
+    <div :class="['opportunity-evaluations-list', 'isOpen']">
         <button class="act-button" @click="toggleMenu()">
-            <label class="label">{{textButton }}</label>
+            <span class="label">{{textButton }}</span>
         </button>
 
         <div class="find">
-            <div class="content">
+            <div class="find-content">
                 <input type="text" v-model="keywords" @input="timeOutFind()" @keyup.enter="timeOutFind(0)" class="label-evaluation__search">
             </div>
             <div v-if="!pending" class="label-evaluation">
                 <div class="label-evaluation__check">
                     <div class="field">
-                        <label class="label-evaluation__check--label">
+                        <span class="label-evaluation__check--label">
                             <?= i::__('Selecione para filtrar') ?>
-                        </label>
-                        <select v-model="filterStatus">
+                        </span>
+                        <select id="evaluation-select" v-model="filterStatus">
                             <template v-for="option in filtersOptions">
                                 <option :value="option.value">{{option.label}}</option>
                             </template>
