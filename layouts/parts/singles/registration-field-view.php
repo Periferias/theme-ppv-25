@@ -1,5 +1,5 @@
 <?php $this->applyTemplateHook('registration-field-item', 'begin') ?>
-<div ng-if="field.fieldType !== 'file' && field.fieldType !== 'section' && field.fieldType !== 'persons' && field.config.entityField !== '@location' && field.config.entityField !== '@links' &&  field.fieldType !== 'links'  && !checkRegistrationFields(field, 'links')">
+<div ng-if="field.fieldType !== 'file' && field.fieldType !== 'section' && field.fieldType !== 'persons' && field.config.entityField !== '@location' && field.config.entityField !== '@links' && field.fieldType !== 'links' && !checkRegistrationFields(field, 'links') && field.fieldType !== 'url'">
     <label>{{field.required ? '*' : ''}} {{field.title}}: </label>
     <div ng-if="field.fieldType !== 'agent-owner-field'">
         <span ng-if="entity[field.fieldName] && field.fieldType !== 'textarea'">
@@ -27,12 +27,19 @@
 </div>
 <div ng-if="field.fieldType === 'persons'">
     <label>{{field.required ? '*' : ''}} {{field.title}}: </label>
-    <div ng-repeat="(key, item) in entity[field.fieldName]" ng-if="item && key !== 'location' && key !== 'publicLocation' ">
-        <div><b ng-if="item.name">Nome: </b>{{item.name}}<b ng-if="item.cpf"> CPF: </b>{{item.cpf}} <b ng-if="item.relationship">Relação: </b>{{item.relationship}} <b ng-if="item.function">Função: </b>{{item.function}}</div>
+    <div ng-repeat="(key, item) in entity[field.fieldName]" ng-if="item && key !== 'location' && key !== 'publicLocation'">
+        <div style="margin-bottom: 15px; padding: 10px; border-bottom: 1px solid #eee;">
+            <strong>{{key + 1}}ª Pessoa:</strong><br>
+            <span ng-if="item.name"><b>Nome: </b>{{item.name}}<br></span>
+            <span ng-if="item.fullName"><b>Nome completo: </b>{{item.fullName}}<br></span>
+            <span ng-if="item.socialName"><b>Nome social: </b>{{item.socialName}}<br></span>
+        </div>
+    </div>
+    <div ng-if="!entity[field.fieldName] || entity[field.fieldName].length === 0">
+        <em><?php \MapasCulturais\i::_e("Campo não informado."); ?></em>
     </div>
 </div>
-<?php //@TODO pegar endereço do campo endereço (verificar porque não esta salvando corretamente, arquicos location.js e _location.php)
-?>
+<?php //@TODO pegar endereço do campo endereço (verificar porque não esta salvando corretamente, arquivos location.js e _location.php) ?>
 <div ng-if="field.config.entityField === '@location'">
     <label>{{field.required ? '*' : ''}} {{field.title}}: </label>
     <div ng-repeat="(key, item) in entity[field.fieldName]"
@@ -42,8 +49,18 @@
     <div ng-if="entity[field.fieldName].hasOwnProperty('publicLocation')">
         <span>
             <?php \MapasCulturais\i::_e("Este endereço pode ficar público na plataforma?:"); ?>
-                {{ entity[field.fieldName].publicLocation === true ? 'Sim' : 'Não' }}
+            {{ entity[field.fieldName].publicLocation === true ? 'Sim' : 'Não' }}
         </span>
+    </div>
+</div>
+
+<div ng-if="field.fieldType === 'url'">
+    <label>{{field.required ? '*' : ''}} {{field.title}}: </label>
+    <div ng-if="entity[field.fieldName]">
+        <a ng-click="openLink($event, entity[field.fieldName])">{{entity[field.fieldName]}}</a>
+    </div>
+    <div ng-if="!entity[field.fieldName]">
+        <em><?php \MapasCulturais\i::_e("Campo não informado."); ?></em>
     </div>
 </div>
 
