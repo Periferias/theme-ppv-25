@@ -318,8 +318,9 @@ Melhorando a exibição da imagem em destaque da home
   gap: .5rem;
   position: absolute;
   right: 48px;
-  top: 2rem;
+  top: -4rem;
   bottom: auto;
+  z-index: 1;
 }
 
 @media (max-width:37.5rem) {
@@ -466,4 +467,29 @@ body.base-v2.controller-registration.action-evaluation {
 
 small.contchar {
   float: right;
+}
+
+@media print {
+
+  .embed-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    height: 6200px !important;
+    max-height: 6200px !important;
+    overflow: hidden !important;
+  }
+  
+  v1-embed-tool {
+    position: absolute !important;
+    top: -5500px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 6200px !important;
+  }
+  
+  v1-embed-tool iframe {
+    width: 100% !important;
+    height: 6200px !important;
+    border: none !important;
+  }
 }
