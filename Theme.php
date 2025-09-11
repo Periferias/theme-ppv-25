@@ -68,5 +68,12 @@ HTML;
                 }
             }
         });
+
+        //forçando a abrir arquivos no browser em caso de pdf
+        $app->hook('GET(file.privateFile).headers', function(&$headers) {
+            $hash = bin2hex(random_bytes(16));
+
+            $headers['Content-Disposition'] = 'inline; filename="' . $hash . '"';
+        });
     }
 }
