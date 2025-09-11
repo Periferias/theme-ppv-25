@@ -1,5 +1,5 @@
 <?php $this->applyTemplateHook('registration-field-item', 'begin') ?>
-<div ng-if="field.fieldType !== 'file' && field.fieldType !== 'section' && field.fieldType !== 'persons' && field.config.entityField !== '@location' && field.config.entityField !== '@links' &&  field.fieldType !== 'links'  && !checkRegistrationFields(field, 'links')">
+<div ng-if="field.fieldType !== 'file' && field.fieldType !== 'section' && field.fieldType !== 'persons' && field.config.entityField !== '@location' && field.config.entityField !== '@links' && field.fieldType !== 'links' && !checkRegistrationFields(field, 'links') && field.fieldType !== 'url'">
     <label>{{field.required ? '*' : ''}} {{field.title}}: </label>
     <div ng-if="field.fieldType !== 'agent-owner-field'">
         <span ng-if="entity[field.fieldName] && field.fieldType !== 'textarea'">
@@ -54,9 +54,19 @@
     </div>
 </div>
 
+<div ng-if="field.fieldType === 'url'">
+    <label>{{field.required ? '*' : ''}} {{field.title}}: </label>
+    <div ng-if="entity[field.fieldName]">
+        <a ng-click="openLink($event, entity[field.fieldName])">{{entity[field.fieldName]}}</a>
+    </div>
+    <div ng-if="!entity[field.fieldName]">
+        <em><?php \MapasCulturais\i::_e("Campo não informado."); ?></em>
+    </div>
+</div>
+
 <div ng-if="field.fieldType === 'file'">
     <label>{{::field.required ? '*' : ''}} {{::field.title}}: </label>
-    <a ng-if="field.file" class="attachment-title" href="{{::field.file.url}}" target="_blank" rel='noopener noreferrer'>{{::field.file.name}}</a>
+    <a ng-if="field.file" class="attachment-title" ng-click="openLink($event, field.file.url)" rel='noopener noreferrer'>{{::field.file.name}}</a>
     <span ng-if="!field.file"><em><?php \MapasCulturais\i::_e("Arquivo não enviado."); ?></em></span>
 </div>
 <?php $this->applyTemplateHook('registration-field-item', 'end') ?>
