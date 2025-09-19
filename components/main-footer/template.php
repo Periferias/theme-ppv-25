@@ -17,8 +17,12 @@ $config = $app->config['social-media'];
     <?php $this->applyTemplateHook("main-footer", "begin") ?>
     <div class="main-footer__content col-6">
             <a class="theme-logo" href="/">
-                <?php $image_url = $app->view->asset('img/logos-oficiais.png', false); ?>
-                <img src="<?= $image_url ?>" alt="Logos" />
+                <?php
+            $logo_periferia = $app->view->asset('img/footer-logo-periferia.png', false);
+            $logo_governo   = $app->view->asset('img/footer-logo-governo.png', false);
+            ?>
+            <img class="logo-perifa" src="<?= $logo_periferia ?>" alt="Logo Periferia" />
+            <img src="<?= $logo_governo ?>" alt="Logo Governo" />
             </a>
     </div>
 
