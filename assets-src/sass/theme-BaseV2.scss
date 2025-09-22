@@ -389,8 +389,20 @@ Trocando o termo Link por um texto melhor na visão geral da Oportunidade
 
 
 .main-footer {
-    background: #F2F2F2;
+    background: #fff;
     padding-bottom: 1.5rem;
+}
+.main-footer .theme-logo {
+  display: inline-flex;
+}
+
+.main-footer .theme-logo img {
+  max-height: 4rem;
+}
+
+.main-footer .theme-logo .logo-perifa {
+  border-right: solid #999 2px;
+  padding-right: 1rem;
 }
 .main-footer__content {
   margin: auto;
