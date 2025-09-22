@@ -389,13 +389,31 @@ Trocando o termo Link por um texto melhor na visão geral da Oportunidade
 
 
 .main-footer {
-    background: #F2F2F2;
+    background: #fff;
     padding-bottom: 1.5rem;
+    align-items: center;
 }
+
 .main-footer__content {
   margin: auto;
   max-width: none;
   width: auto;
+}
+
+.main-footer__content .theme-logo {
+  display: inline-flex;
+}
+
+.main-footer__content .theme-logo img {
+  max-height: 4rem;
+}
+
+.main-footer__content .theme-logo .logo-perifa {
+  border-right: solid #999 2px;
+  padding-right: 1rem;
+}
+.main-footer__content .theme-logo .logo-gov{
+  max-height: 8rem;
 }
 
 // Para o funcionamento do postion sticky na página de avaliações

@@ -22,7 +22,7 @@ $config = $app->config['social-media'];
             $logo_governo   = $app->view->asset('img/footer-logo-governo.png', false);
             ?>
             <img class="logo-perifa" src="<?= $logo_periferia ?>" alt="Logo Periferia" />
-            <img src="<?= $logo_governo ?>" alt="Logo Governo" />
+            <img class="logo-gov" src="<?= $logo_governo ?>" alt="Logo Governo" />
             </a>
     </div>
 
