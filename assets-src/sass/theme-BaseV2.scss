@@ -324,7 +324,7 @@ Melhorando a exibição da imagem em destaque da home
 .panel-nav__left,
 .vertical__line,
 .panel-nav__right h3,
-.panel-nav__right > ul, 
+.panel-nav__right > ul,
 .panel-nav__right .panel-nav__line {
   display: none;
 }
@@ -344,7 +344,7 @@ Melhorando a exibição da imagem em destaque da home
   display: none;
 }
 
-/** 
+/**
 Trocando o termo Link por um texto melhor na visão geral da Oportunidade
 */
 .action-single .entity-links__title {
@@ -361,10 +361,10 @@ Trocando o termo Link por um texto melhor na visão geral da Oportunidade
     white-space: nowrap;
 }
 
-// Ajusta altura da linha do título (espaçmento vertical) do Formulário de inscrição para dispositivos mobile 
+// Ajusta altura da linha do título (espaçmento vertical) do Formulário de inscrição para dispositivos mobile
 @media screen and (max-width: 50rem) {
   .controller-registration .registration.edit .registration__title {
-    line-height: 3.3rem; 
+    line-height: 3.3rem;
   }
 }
 
@@ -413,7 +413,7 @@ Trocando o termo Link por um texto melhor na visão geral da Oportunidade
   padding-right: 1rem;
 }
 .main-footer__content .theme-logo .logo-gov{
-  max-height: 8rem;
+  max-height: 6rem;
 }
 
 // Para o funcionamento do postion sticky na página de avaliações
