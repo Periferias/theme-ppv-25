@@ -48,7 +48,7 @@
     </div>
 </div>
 
-<?php /* Não exibir detalhamento de notas 
+
 <div v-if="registration.evaluationsDetails.length" v-for="(evaluation, index) in registration.evaluationsDetails" class="registration-results__card">
     <div class="registration-results__card-header">
         <div class="registration-results__card-title">
@@ -62,6 +62,7 @@
             <p><label><?= i::__('Pontuação total: ') ?></label> <strong>{{registration.consolidatedResult}}</strong></p>    
         </div>
     </div>
+    <?php /*
     <div class="registration-results__card-content">
         <div class="registration-results__opinion registration-results__opinion--document">
         <h5 class="registration-results__opinion-title bold"><?= i::__('Parecer') ?>:</h5>
@@ -70,6 +71,7 @@
             </div>
         </div>
     </div>
+    */ ?>
     <div class="registration-results__card-content">
         <div class="registration-results__opinion registration-results__opinion--document">
             <h5 class="registration-results__opinion-title bold"><?= i::__('Detalhamento da pontuação') ?>:</h5>
@@ -87,4 +89,4 @@
         </div>
     </div>
 </div>
-*/ ?>
+
