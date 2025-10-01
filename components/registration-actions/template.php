@@ -50,7 +50,7 @@ $term_url = $app->createUrl('site', 'termoAdesao');
             <mc-loading v-if="isLastStep" :entity="registration"></mc-loading>
             <mc-confirm-button 
                 v-if="isLastStep && !registration.__processing" 
-                title="<?= i::esc_attr__('Quer enviar sua inscrição?') ?>"
+                title="<?= i::esc_attr__('Quer enviar seu recurso?') ?>"
                 yes="<?= i::esc_attr__('Enviar agora') ?>" 
                 no="<?= i::esc_attr__('Cancelar') ?>" 
                 @confirm="send($event)"
@@ -64,7 +64,7 @@ $term_url = $app->createUrl('site', 'termoAdesao');
                     </button>
                 </template>
                 <template #message="message">
-                    <?php i::_e('Ao enviar sua inscrição você já estará participando do Prêmio Periferia Viva 2025.') ?>
+                    <?php i::_e('Lembre-se que o envio só poderá ser feito uma única vez.') ?>
                 </template>
             </mc-confirm-button>
         </div>
