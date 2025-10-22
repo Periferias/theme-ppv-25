@@ -3,6 +3,7 @@
 namespace PeriferiaViva25;
 
 use MapasCulturais\App;
+use Apps;
 
 class Theme extends \MapasCulturais\Themes\BaseV2\Theme {
 
@@ -74,6 +75,14 @@ HTML;
             $hash = bin2hex(random_bytes(16));
 
             $headers['Content-Disposition'] = 'inline; filename="' . $hash . '"';
+        });
+
+        // define o JWT como Auth Provider caso venha um header authorization
+        $app->hook('app.register:after', function () {
+            /** @var App $this */
+            if($token = $this->request->headers->get('authorization')){
+                $this->_auth = new Apps\JWTAuthProvider(['token' => $token]);
+            }
         });
     }
 }
