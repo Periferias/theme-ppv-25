@@ -430,3 +430,9 @@ body.base-v2.controller-registration.action-evaluation {
 small.contchar {
     float: right;
 }
+
+
+//Trava a barra de Gerenciar Oportunidade
+.layout-entity {
+  overflow: visible !important;
+}
