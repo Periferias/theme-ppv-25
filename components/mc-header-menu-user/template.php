@@ -40,7 +40,7 @@ $this->import('
                     <ul>
                         <li><mc-link route="panel/registrations" icon="opportunity"><?= i::__('Minhas inscrições') ?></mc-link></li>
                         <li><mc-link route="panel/evaluations" icon="opportunity"><?= i::__('Minhas avaliações') ?></mc-link></li>
-                        <li v-if="global.auth.is('admin')"><mc-link route="panel/user-management" icon="opportunity"><?= i::__('Gestão de usuários') ?></mc-link></li>
+                        <li><mc-link route="panel/validations" icon="opportunity"><?= i::__('Minhas validações') ?></mc-link></li>
                     </ul>
 
                     <?php $this->applyTemplateHook('header-menu-user--itens', 'end') ?>
@@ -49,6 +49,7 @@ $this->import('
                 <template #end>
                     <div class="user-menu__line"></div>
                     <li><mc-link :entity='profile' icon><?= i::__('Meu Perfil') ?></mc-link></li>
+                        <li v-if="global.auth.is('admin')"><mc-link route="panel/user-management" icon="opportunity"><?= i::__('Gestão de usuários') ?></mc-link></li>
                     <li><mc-link route='auth/logout' icon="logout"><?= i::__('Sair') ?></mc-link></li>
                     <?php $this->applyTemplateHook('header-menu-user--desktop', 'end') ?>
                 </template>
